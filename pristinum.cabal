@@ -51,7 +51,10 @@ extra-source-files:
 
 library
     -- Modules exported by the library.
-    exposed-modules:  Pristinum.Test
+    exposed-modules:  Pristinum.AST,
+                      Pristinum.Lexer,
+                      Pristinum.Parser,
+                      Pristinum.Utils
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -64,7 +67,8 @@ library
                       containers,
                       mtl,
                       parsec,
-                      vector
+                      vector,
+                      pretty-simple
 
     -- Directories containing source files.
     hs-source-dirs:   src-lib
