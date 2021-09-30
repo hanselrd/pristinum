@@ -1,4 +1,6 @@
-module Pristinum.Parser (parseString) where
+module Pristinum.Parser
+  ( parseString
+  ) where
 
 import           Pristinum.AST
 import           Pristinum.Lexer
@@ -34,7 +36,7 @@ operators =
   , [Infix (reservedOp "^" >> return (Binary BitwiseXor)) AssocLeft]
   , [Infix (reservedOp "|" >> return (Binary BitwiseOr)) AssocLeft]
   , [Infix (reservedOp "&&" >> return (Binary LogicalAnd)) AssocLeft]
-  , [Infix (reservedOp "&&" >> return (Binary LogicalOr)) AssocLeft]
+  , [Infix (reservedOp "||" >> return (Binary LogicalOr)) AssocLeft]
   ]
 
 term =
@@ -58,9 +60,7 @@ stmt =
   LetStmt
     <$> (reserved "let" *> identifier)
     <*> (reservedOp "=" *> expr)
-    <|> AssignStmt
-    <$> identifier
-    <*> (reservedOp "=" *> expr)
+    <|> try (AssignStmt <$> identifier <*> (reservedOp "=" *> expr))
     <|> IfStmt
     <$> (reserved "if" *> expr <* (char ':' *> whiteSpace))
     <*> many stmt

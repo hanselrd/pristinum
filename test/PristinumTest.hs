@@ -1,6 +1,8 @@
-module Main
-  ( main
-  ) where
+module Main where
 
-main :: IO ()
-main = putStrLn "Test suite not yet implemented."
+import qualified Pristinum.ParserTest
+import           Test.Tasty
+
+tests = testGroup "Unit tests" [Pristinum.ParserTest.tests]
+
+main = defaultMain tests
