@@ -51,10 +51,11 @@ extra-source-files:
 
 library
     -- Modules exported by the library.
-    exposed-modules:  Pristinum.AST,
-                      Pristinum.Lexer,
-                      Pristinum.Parser,
-                      Pristinum.Utils
+    exposed-modules:
+        Pristinum.AST,
+        Pristinum.Lexer,
+        Pristinum.Parser,
+        Pristinum.Utils
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -63,12 +64,20 @@ library
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.14.3.0,
-                      containers,
-                      mtl,
-                      parsec,
-                      vector,
-                      pretty-simple
+    build-depends:
+        base ^>=4.14.3.0,
+        array,
+        containers,
+        MissingH,
+        mtl,
+        optparse-applicative,
+        parsec,
+        pretty-simple,
+        vector
+
+    build-tool-depends:
+        alex:alex,
+        happy:happy
 
     -- Directories containing source files.
     hs-source-dirs:   src-lib
@@ -111,7 +120,8 @@ test-suite pristinum-test
     main-is:          PristinumTest.hs
 
     -- Test dependencies.
-    build-depends:    base ^>=4.14.3.0,
-                      tasty,
-                      tasty-hunit,
-                      pristinum
+    build-depends:
+        base ^>=4.14.3.0,
+        tasty,
+        tasty-hunit,
+        pristinum

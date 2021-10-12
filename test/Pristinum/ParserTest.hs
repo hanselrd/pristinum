@@ -1,198 +1,218 @@
 module Pristinum.ParserTest
-  ( tests
-  ) where
+  ( tests,
+  )
+where
 
-import           Pristinum.AST
-import           Pristinum.Parser
-import           Test.Tasty
-import           Test.Tasty.HUnit
+import Pristinum.AST
+import Pristinum.Parser
+import Test.Tasty
+import Test.Tasty.HUnit
 
 unitTests =
   [ testGroup
-    "expressions"
-    [ testCase "null"  (parseString "null" @?= Right [ExprStmt LNull])
-    , testCase "true"  (parseString "true" @?= Right [ExprStmt (LBool True)])
-    , testCase "false" (parseString "false" @?= Right [ExprStmt (LBool False)])
-    , testCase
-      "string"
-      (parseString "\"pristinum\"" @?= Right [ExprStmt (LString "pristinum")])
-    , testCase "number"   (parseString "123" @?= Right [ExprStmt (LNumber 123)])
-    , testCase "variable" (parseString "x" @?= Right [ExprStmt (Variable "x")])
-    , testGroup
-      "call"
-      [ testCase "without arguments"
-                 (parseString "x()" @?= Right [ExprStmt (Call "x" [])])
-      , testCase
-        "with arguments"
-        (   parseString "x(1, 2, 3)"
-        @?= Right [ExprStmt (Call "x" [LNumber 1, LNumber 2, LNumber 3])]
-        )
-      ]
-    , testGroup
-      "unary operation"
+      "expressions"
       [ testCase
-        "negative"
-        (parseString "-123" @?= Right [ExprStmt (Unary Negative (LNumber 123))])
-      , testCase
-        "bitwise not"
-        (   parseString "~123"
-        @?= Right [ExprStmt (Unary BitwiseNot (LNumber 123))]
-        )
-      , testCase
-        "logical not"
-        (   parseString "!true"
-        @?= Right [ExprStmt (Unary LogicalNot (LBool True))]
-        )
+          "null"
+          (parseString "null" @?= Right (Program [PushStmt LitNull])),
+        testCase
+          "true"
+          (parseString "true" @?= Right (Program [PushStmt (LitBool True)])),
+        testCase
+          "false"
+          (parseString "false" @?= Right (Program [PushStmt (LitBool False)])),
+        testCase
+          "number"
+          (parseString "123" @?= Right (Program [PushStmt (LitNumber 123)])),
+        testCase
+          "string"
+          ( parseString "\"pristinum\""
+              @?= Right (Program [PushStmt (LitString "pristinum")])
+          ),
+        testCase
+          "identifier"
+          (parseString "x" @?= Right (Program [PushStmt (LitIdentifier "x")])),
+        testCase "drop" (parseString "drop" @?= Right (Program [DropStmt])),
+        testGroup
+          "unary operation"
+          [ testCase
+              "negative"
+              (parseString "neg" @?= Right (Program [UnaryOpStmt UnOpNegative])),
+            testCase
+              "bitwise not"
+              (parseString "~" @?= Right (Program [UnaryOpStmt UnOpBitwiseNot])),
+            testCase
+              "logical not"
+              (parseString "!" @?= Right (Program [UnaryOpStmt UnOpLogicalNot]))
+          ],
+        testGroup
+          "binary operation"
+          [ testCase
+              "add"
+              (parseString "+" @?= Right (Program [BinaryOpStmt BinOpAdd])),
+            testCase
+              "subtract"
+              (parseString "-" @?= Right (Program [BinaryOpStmt BinOpSubtract])),
+            testCase
+              "multiply"
+              (parseString "*" @?= Right (Program [BinaryOpStmt BinOpMultiply])),
+            testCase
+              "divide"
+              (parseString "/" @?= Right (Program [BinaryOpStmt BinOpDivide])),
+            testCase
+              "mod"
+              (parseString "%" @?= Right (Program [BinaryOpStmt BinOpMod])),
+            testCase
+              "bitwise shift left"
+              ( parseString "<<"
+                  @?= Right (Program [BinaryOpStmt BinOpBitwiseShiftLeft])
+              ),
+            testCase
+              "bitwise shift right"
+              ( parseString ">>"
+                  @?= Right (Program [BinaryOpStmt BinOpBitwiseShiftRight])
+              ),
+            testCase
+              "bitwise and"
+              (parseString "&" @?= Right (Program [BinaryOpStmt BinOpBitwiseAnd])),
+            testCase
+              "bitwise or"
+              (parseString "|" @?= Right (Program [BinaryOpStmt BinOpBitwiseOr])),
+            testCase
+              "bitwise xor"
+              (parseString "^" @?= Right (Program [BinaryOpStmt BinOpBitwiseXor])),
+            testCase
+              "equal"
+              (parseString "==" @?= Right (Program [BinaryOpStmt BinOpEqual])),
+            testCase
+              "not equal"
+              (parseString "!=" @?= Right (Program [BinaryOpStmt BinOpNotEqual])),
+            testCase
+              "less"
+              (parseString "<" @?= Right (Program [BinaryOpStmt BinOpLess])),
+            testCase
+              "greater"
+              (parseString ">" @?= Right (Program [BinaryOpStmt BinOpGreater])),
+            testCase
+              "less equal"
+              (parseString "<=" @?= Right (Program [BinaryOpStmt BinOpLessEqual])),
+            testCase
+              "greater equal"
+              ( parseString ">=" @?= Right (Program [BinaryOpStmt BinOpGreaterEqual])
+              ),
+            testCase
+              "logical and"
+              (parseString "&&" @?= Right (Program [BinaryOpStmt BinOpLogicalAnd])),
+            testCase
+              "logical or"
+              (parseString "||" @?= Right (Program [BinaryOpStmt BinOpLogicalOr]))
+          ],
+        testGroup
+          "if"
+          [ testCase
+              "without elif/else"
+              ( parseString "if 1 do 2 end"
+                  @?= Right
+                    ( Program
+                        [ IfStmt
+                            [PushStmt (LitNumber 1)]
+                            [PushStmt (LitNumber 2)]
+                            []
+                        ]
+                    )
+              ),
+            testCase
+              "without elif/with else"
+              ( parseString "if 1 do 2 else 3 end"
+                  @?= Right
+                    ( Program
+                        [ IfStmt
+                            [PushStmt (LitNumber 1)]
+                            [PushStmt (LitNumber 2)]
+                            [PushStmt (LitNumber 3)]
+                        ]
+                    )
+              ),
+            testCase
+              "with elif/without else"
+              ( parseString "if 1 do 2 elif 3 do 4 end"
+                  @?= Right
+                    ( Program
+                        [ IfStmt
+                            [PushStmt (LitNumber 1)]
+                            [PushStmt (LitNumber 2)]
+                            [IfStmt [PushStmt (LitNumber 3)] [PushStmt (LitNumber 4)] []]
+                        ]
+                    )
+              ),
+            testCase
+              "with elif/else"
+              ( parseString "if 1 do 2 elif 3 do 4 else 5 end"
+                  @?= Right
+                    ( Program
+                        [ IfStmt
+                            [PushStmt (LitNumber 1)]
+                            [PushStmt (LitNumber 2)]
+                            [ IfStmt
+                                [PushStmt (LitNumber 3)]
+                                [PushStmt (LitNumber 4)]
+                                [PushStmt (LitNumber 5)]
+                            ]
+                        ]
+                    )
+              ),
+            testCase
+              "with elif/else (advanced)"
+              ( parseString
+                  "if 1 do 2 elif 3 do 4 elif 5 do 6 elif 7 do 8 else 9 if 10 do 11 end end if 12 do 13 elif 14 do 15 else 16 end"
+                  @?= Right
+                    ( Program
+                        [ IfStmt
+                            [PushStmt (LitNumber 1)]
+                            [PushStmt (LitNumber 2)]
+                            [ IfStmt
+                                [PushStmt (LitNumber 3)]
+                                [PushStmt (LitNumber 4)]
+                                [ IfStmt
+                                    [PushStmt (LitNumber 5)]
+                                    [PushStmt (LitNumber 6)]
+                                    [ IfStmt
+                                        [PushStmt (LitNumber 7)]
+                                        [PushStmt (LitNumber 8)]
+                                        [ PushStmt (LitNumber 9),
+                                          IfStmt
+                                            [PushStmt (LitNumber 10)]
+                                            [PushStmt (LitNumber 11)]
+                                            []
+                                        ]
+                                    ]
+                                ]
+                            ],
+                          IfStmt
+                            [PushStmt (LitNumber 12)]
+                            [PushStmt (LitNumber 13)]
+                            [ IfStmt
+                                [PushStmt (LitNumber 14)]
+                                [PushStmt (LitNumber 15)]
+                                [PushStmt (LitNumber 16)]
+                            ]
+                        ]
+                    )
+              )
+          ],
+        testCase
+          "while"
+          ( parseString "while 1 do 2 end"
+              @?= Right
+                ( Program
+                    [WhileStmt [PushStmt (LitNumber 1)] [PushStmt (LitNumber 2)]]
+                )
+          ),
+        testCase
+          "macro"
+          ( parseString "macro test do 1 end"
+              @?= Right (Program [MacroStmt "test" [PushStmt (LitNumber 1)]])
+          )
       ]
-    , testGroup
-      "binary operation"
-      [ testCase
-        "add"
-        (   parseString "123 + 456"
-        @?= Right [ExprStmt (Binary Add (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "subtract"
-        (   parseString "123 - 456"
-        @?= Right [ExprStmt (Binary Subtract (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "multiply"
-        (   parseString "123 * 456"
-        @?= Right [ExprStmt (Binary Multiply (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "divide"
-        (   parseString "123 / 456"
-        @?= Right [ExprStmt (Binary Divide (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "mod"
-        (   parseString "123 % 456"
-        @?= Right [ExprStmt (Binary Mod (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "bitwise shift left"
-        (parseString "123 << 4" @?= Right
-          [ExprStmt (Binary BitwiseShiftLeft (LNumber 123) (LNumber 4))]
-        )
-      , testCase
-        "bitwise shift right"
-        (parseString "123 >> 4" @?= Right
-          [ExprStmt (Binary BitwiseShiftRight (LNumber 123) (LNumber 4))]
-        )
-      , testCase
-        "bitwise and"
-        (   parseString "123 & 456"
-        @?= Right [ExprStmt (Binary BitwiseAnd (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "bitwise or"
-        (   parseString "123 | 456"
-        @?= Right [ExprStmt (Binary BitwiseOr (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "bitwise xor"
-        (   parseString "123 ^ 456"
-        @?= Right [ExprStmt (Binary BitwiseXor (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "equal"
-        (   parseString "123 == 456"
-        @?= Right [ExprStmt (Binary Equal (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "not equal"
-        (   parseString "123 != 456"
-        @?= Right [ExprStmt (Binary NotEqual (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "less"
-        (   parseString "123 < 456"
-        @?= Right [ExprStmt (Binary Less (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "greater"
-        (   parseString "123 > 456"
-        @?= Right [ExprStmt (Binary Greater (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "less equal"
-        (   parseString "123 <= 456"
-        @?= Right [ExprStmt (Binary LessEqual (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "greater equal"
-        (parseString "123 >= 456" @?= Right
-          [ExprStmt (Binary GreaterEqual (LNumber 123) (LNumber 456))]
-        )
-      , testCase
-        "logical and"
-        (   parseString "true && false"
-        @?= Right [ExprStmt (Binary LogicalAnd (LBool True) (LBool False))]
-        )
-      , testCase
-        "logical or"
-        (   parseString "true || false"
-        @?= Right [ExprStmt (Binary LogicalOr (LBool True) (LBool False))]
-        )
-      ]
-    ]
-  , testGroup
-    "statements"
-    [ testCase "expression"
-               (parseString "true" @?= Right [ExprStmt (LBool True)])
-    , testCase
-      "let"
-      (parseString "let x = true" @?= Right [LetStmt "x" (LBool True)])
-    , testCase
-      "assignment"
-      (parseString "x = true" @?= Right [AssignStmt "x" (LBool True)])
-    , testGroup
-      "if"
-      [ testCase
-        "without else"
-        (parseString "if 123 == 456: x = true end" @?= Right
-          [ IfStmt (Binary Equal (LNumber 123) (LNumber 456))
-                   [AssignStmt "x" (LBool True)]
-                   Nothing
-          ]
-        )
-      , testCase
-        "with else"
-        (parseString "if 123 == 456: x = true else x = false end" @?= Right
-          [ IfStmt (Binary Equal (LNumber 123) (LNumber 456))
-                   [AssignStmt "x" (LBool True)]
-                   (Just [AssignStmt "x" (LBool False)])
-          ]
-        )
-      ]
-    , testCase
-      "while"
-      (parseString "while 123 == 456: x = true end" @?= Right
-        [ WhileStmt (Binary Equal (LNumber 123) (LNumber 456))
-                    [AssignStmt "x" (LBool True)]
-        ]
-      )
-    , testCase
-      "function"
-      (parseString "@useless_sum (a, b): a + b end" @?= Right
-        [ FunctionStmt "useless_sum"
-                       ["a", "b"]
-                       [ExprStmt (Binary Add (Variable "a") (Variable "b"))]
-        ]
-      )
-    , testGroup
-      "return"
-      [ testCase "without expression"
-                 (parseString "return" @?= Right [ReturnStmt Nothing])
-      , testCase
-        "with expression"
-        (parseString "return 123 + 456" @?= Right
-          [ReturnStmt (Just (Binary Add (LNumber 123) (LNumber 456)))]
-        )
-      ]
-    ]
   ]
 
 tests = testGroup "Parser" unitTests
