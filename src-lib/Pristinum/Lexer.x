@@ -17,25 +17,23 @@ $alpha = [a-zA-Z]
 tokens :-
     $white+                                      ;--{ \s -> TokenWhiteSpace s }
     "//".*                                       ;--{ \s -> TokenComment (tail (tail s)) }
+    let                                          { \s -> TokenReserved s }
     if                                           { \s -> TokenReserved s }
     elif                                         { \s -> TokenReserved s }
     else                                         { \s -> TokenReserved s }
     while                                        { \s -> TokenReserved s }
     do                                           { \s -> TokenReserved s }
-    macro                                        { \s -> TokenReserved s }
+    func                                         { \s -> TokenReserved s }
     end                                          { \s -> TokenReserved s }
+    return                                       { \s -> TokenReserved s }
     null                                         { \s -> TokenReserved s }
     true                                         { \s -> TokenReserved s }
     false                                        { \s -> TokenReserved s }
-    drop                                         { \s -> TokenReserved s }
-    neg                                          { \s -> TokenReserved s }
-    load                                         { \s -> TokenReserved s }
-    store                                        { \s -> TokenReserved s }
-    "@"                                          { \s -> TokenSymbol s }
-    "#"                                          { \s -> TokenSymbol s }
-    ":"                                          { \s -> TokenSymbol s }
+    "."                                          { \s -> TokenSymbol s }
+    ","                                          { \s -> TokenSymbol s }
     "("                                          { \s -> TokenSymbol s }
     ")"                                          { \s -> TokenSymbol s }
+    "="                                          { \s -> TokenSymbol s }
     "+"                                          { \s -> TokenSymbol s }
     "-"                                          { \s -> TokenSymbol s }
     "*"                                          { \s -> TokenSymbol s }

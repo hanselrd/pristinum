@@ -2,35 +2,51 @@ module Pristinum.AST where
 
 import Data.Int
 
+type Identifier = String
+
 newtype Program = Program [Stmt]
   deriving (Show, Eq)
 
 data Stmt
-  = PushStmt {pushStmtLit :: Lit}
-  | DropStmt
-  | UnaryOpStmt {unaryOpStmtUnOp :: UnOp}
-  | BinaryOpStmt {binaryOpStmtBinOp :: BinOp}
+  = ExprStmt
+      { exprStmtBody :: Expr
+      }
+  | LetStmt
+      { letStmtName :: Identifier,
+        letStmtBody :: Expr
+      }
+  | AssignStmt
+      { assignStmtName :: Identifier,
+        assignStmtBody :: Expr
+      }
   | IfStmt
-      { ifStmtCondition :: [Stmt],
+      { ifStmtCondition :: Expr,
         ifStmtBody :: [Stmt],
-        ifStmtElseBody :: [Stmt]
+        ifStmtElseBody :: Maybe [Stmt]
       }
   | WhileStmt
-      { whileStmtCondition :: [Stmt],
+      { whileStmtCondition :: Expr,
         whileStmtBody :: [Stmt]
       }
-  | MacroStmt
-      { macroStmtIdentifier :: String,
-        macroStmtBody :: [Stmt]
+  | FunctionStmt
+      { functionStmtName :: Identifier,
+        functionStmtParameters :: [Identifier],
+        functionStmtBody :: [Stmt]
+      }
+  | ReturnStmt
+      { returnStmtBody :: Maybe Expr
       }
   deriving (Show, Eq)
 
-data Lit
-  = LitNull
-  | LitBool Bool
-  | LitNumber Integer
-  | LitString String
-  | LitIdentifier String
+data Expr
+  = ExprNull
+  | ExprBool Bool
+  | ExprNumber Integer
+  | ExprString String
+  | ExprVariable Identifier
+  | ExprCall Identifier [Expr]
+  | ExprUnaryOp UnOp Expr
+  | ExprBinaryOp BinOp Expr Expr
   deriving (Show, Eq)
 
 data UnOp

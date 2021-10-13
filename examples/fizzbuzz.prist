@@ -1,0 +1,15 @@
+let number = 1 .
+while number 100 <= do
+    let result = "" .
+    if number 3 % 0 == do
+        result = result "fizz" + .
+    elif number 5 % 0 == do
+        result = result "buzz" + .
+    end
+    if result "" != do
+        print(result) .
+    else
+        print(number) .
+    end
+    number = number 1 + .
+end

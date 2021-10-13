@@ -53,6 +53,7 @@ library
     -- Modules exported by the library.
     exposed-modules:
         Pristinum.AST,
+        Pristinum.Interpreter,
         Pristinum.Lexer,
         Pristinum.Parser,
         Pristinum.Utils
@@ -68,11 +69,13 @@ library
         base ^>=4.14.3.0,
         array,
         containers,
+        lifted-base,
         MissingH,
         mtl,
         optparse-applicative,
         parsec,
         pretty-simple,
+        transformers-base,
         vector
 
     build-tool-depends:
