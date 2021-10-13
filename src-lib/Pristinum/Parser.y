@@ -85,8 +85,7 @@ ParameterCommaList :                               { [] }
 ParameterCommaLoop : IDENT                         { [$1] }
                    | ParameterCommaLoop "," IDENT  { $1 ++ [$3] }
 
-Expr : "(" Expr ")"                     { $2 }
-     | "null"                           { ExprNull }
+Expr : "null"                           { ExprNull }
      | "true"                           { ExprBool True }
      | "false"                          { ExprBool False }
      | NUM                              { ExprNumber $1 }

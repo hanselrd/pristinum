@@ -55,8 +55,7 @@ library
         Pristinum.AST,
         Pristinum.Interpreter,
         Pristinum.Lexer,
-        Pristinum.Parser,
-        Pristinum.Utils
+        Pristinum.Parser
 
     -- Modules included in this library but not exported.
     -- other-modules:

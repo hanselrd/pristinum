@@ -1,0 +1,12 @@
+func factorial(n) do
+    if n 2 < do
+        return n .
+    end
+    return n factorial(n 1 -) * .
+end
+
+let n = 1 .
+while n 15 < do
+    print(factorial(n)) .
+    n = n 1 + .
+end
