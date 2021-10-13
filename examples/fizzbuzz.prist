@@ -1,13 +1,11 @@
 let number = 1 .
 while number 100 <= do
-    let result = "" .
-    if number 3 % 0 == do
-        result = result "fizz" + .
+    if number 15 % 0 == do
+        print("fizzbuzz") .
+    elif number 3 % 0 == do
+        print("fizz") .
     elif number 5 % 0 == do
-        result = result "buzz" + .
-    end
-    if result "" != do
-        print(result) .
+        print("buzz") .
     else
         print(number) .
     end

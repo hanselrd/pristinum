@@ -13,204 +13,509 @@ unitTests =
       "expressions"
       [ testCase
           "null"
-          (parseString "null" @?= Right (Program [PushStmt LitNull])),
+          (parseString "null ." @?= Right (Program [ExprStmt ExprNull])),
         testCase
           "true"
-          (parseString "true" @?= Right (Program [PushStmt (LitBool True)])),
+          (parseString "true ." @?= Right (Program [ExprStmt (ExprBool True)])),
         testCase
           "false"
-          (parseString "false" @?= Right (Program [PushStmt (LitBool False)])),
+          (parseString "false ." @?= Right (Program [ExprStmt (ExprBool False)])),
         testCase
           "number"
-          (parseString "123" @?= Right (Program [PushStmt (LitNumber 123)])),
+          (parseString "123 ." @?= Right (Program [ExprStmt (ExprNumber 123)])),
         testCase
           "string"
-          ( parseString "\"pristinum\""
-              @?= Right (Program [PushStmt (LitString "pristinum")])
+          ( parseString "\"pristinum\" ."
+              @?= Right (Program [ExprStmt (ExprString "pristinum")])
           ),
         testCase
-          "identifier"
-          (parseString "x" @?= Right (Program [PushStmt (LitIdentifier "x")])),
-        testCase "drop" (parseString "drop" @?= Right (Program [DropStmt])),
+          "variable"
+          (parseString "x ." @?= Right (Program [ExprStmt (ExprVariable "x")])),
+        testGroup
+          "call"
+          [ testCase
+              "with no arguments"
+              ( parseString "x() ."
+                  @?= Right (Program [ExprStmt {exprStmtBody = ExprCall "x" []}])
+              ),
+            testCase
+              "with 1 argument"
+              ( parseString "x(1) ."
+                  @?= Right
+                    ( Program
+                        [ExprStmt {exprStmtBody = ExprCall "x" [ExprNumber 1]}]
+                    )
+              ),
+            testCase
+              "with 2 arguments"
+              ( parseString "x(1, 2) ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody = ExprCall "x" [ExprNumber 1, ExprNumber 2]
+                            }
+                        ]
+                    )
+              )
+          ],
         testGroup
           "unary operation"
-          [ testCase
-              "negative"
-              (parseString "neg" @?= Right (Program [UnaryOpStmt UnOpNegative])),
+          [ -- testCase
+            --   "negative"
+            --   ( parseString "1 neg ."
+            --       @?= Right
+            --         (Program [ExprStmt (ExprUnaryOp UnOpNegative (ExprNumber 1))])
+            --   ),
             testCase
               "bitwise not"
-              (parseString "~" @?= Right (Program [UnaryOpStmt UnOpBitwiseNot])),
+              ( parseString "1 ~ ."
+                  @?= Right
+                    (Program [ExprStmt (ExprUnaryOp UnOpBitwiseNot (ExprNumber 1))])
+              ),
             testCase
               "logical not"
-              (parseString "!" @?= Right (Program [UnaryOpStmt UnOpLogicalNot]))
+              ( parseString "true ! ."
+                  @?= Right
+                    (Program [ExprStmt (ExprUnaryOp UnOpLogicalNot (ExprBool True))])
+              )
           ],
         testGroup
           "binary operation"
           [ testCase
               "add"
-              (parseString "+" @?= Right (Program [BinaryOpStmt BinOpAdd])),
+              ( parseString "1 2 + ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpAdd
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "subtract"
-              (parseString "-" @?= Right (Program [BinaryOpStmt BinOpSubtract])),
+              ( parseString "1 2 - ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpSubtract
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "multiply"
-              (parseString "*" @?= Right (Program [BinaryOpStmt BinOpMultiply])),
+              ( parseString "1 2 * ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpMultiply
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "divide"
-              (parseString "/" @?= Right (Program [BinaryOpStmt BinOpDivide])),
+              ( parseString "1 2 / ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpDivide
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "mod"
-              (parseString "%" @?= Right (Program [BinaryOpStmt BinOpMod])),
+              ( parseString "1 2 % ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpMod
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "bitwise shift left"
-              ( parseString "<<"
-                  @?= Right (Program [BinaryOpStmt BinOpBitwiseShiftLeft])
+              ( parseString "1 2 << ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpBitwiseShiftLeft
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
               ),
             testCase
               "bitwise shift right"
-              ( parseString ">>"
-                  @?= Right (Program [BinaryOpStmt BinOpBitwiseShiftRight])
+              ( parseString "1 2 >> ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpBitwiseShiftRight
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
               ),
             testCase
               "bitwise and"
-              (parseString "&" @?= Right (Program [BinaryOpStmt BinOpBitwiseAnd])),
+              ( parseString "1 2 & ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpBitwiseAnd
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "bitwise or"
-              (parseString "|" @?= Right (Program [BinaryOpStmt BinOpBitwiseOr])),
+              ( parseString "1 2 | ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpBitwiseOr
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "bitwise xor"
-              (parseString "^" @?= Right (Program [BinaryOpStmt BinOpBitwiseXor])),
+              ( parseString "1 2 ^ ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpBitwiseXor
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "equal"
-              (parseString "==" @?= Right (Program [BinaryOpStmt BinOpEqual])),
+              ( parseString "1 2 == ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpEqual
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "not equal"
-              (parseString "!=" @?= Right (Program [BinaryOpStmt BinOpNotEqual])),
+              ( parseString "1 2 != ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpNotEqual
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "less"
-              (parseString "<" @?= Right (Program [BinaryOpStmt BinOpLess])),
+              ( parseString "1 2 < ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpLess
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "greater"
-              (parseString ">" @?= Right (Program [BinaryOpStmt BinOpGreater])),
+              ( parseString "1 2 > ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpGreater
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "less equal"
-              (parseString "<=" @?= Right (Program [BinaryOpStmt BinOpLessEqual])),
+              ( parseString "1 2 <= ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpLessEqual
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "greater equal"
-              ( parseString ">=" @?= Right (Program [BinaryOpStmt BinOpGreaterEqual])
+              ( parseString "1 2 >= ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpGreaterEqual
+                                  (ExprNumber 1)
+                                  (ExprNumber 2)
+                            }
+                        ]
+                    )
               ),
             testCase
               "logical and"
-              (parseString "&&" @?= Right (Program [BinaryOpStmt BinOpLogicalAnd])),
+              ( parseString "true false && ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpLogicalAnd
+                                  (ExprBool True)
+                                  (ExprBool False)
+                            }
+                        ]
+                    )
+              ),
             testCase
               "logical or"
-              (parseString "||" @?= Right (Program [BinaryOpStmt BinOpLogicalOr]))
+              ( parseString "true false || ."
+                  @?= Right
+                    ( Program
+                        [ ExprStmt
+                            { exprStmtBody =
+                                ExprBinaryOp
+                                  BinOpLogicalOr
+                                  (ExprBool True)
+                                  (ExprBool False)
+                            }
+                        ]
+                    )
+              )
           ],
         testGroup
           "if"
           [ testCase
               "without elif/else"
-              ( parseString "if 1 do 2 end"
+              ( parseString "if 1 do 2 . end"
                   @?= Right
                     ( Program
                         [ IfStmt
-                            [PushStmt (LitNumber 1)]
-                            [PushStmt (LitNumber 2)]
-                            []
+                            { ifStmtCondition = ExprNumber 1,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 2}],
+                              ifStmtElseBody = Nothing
+                            }
                         ]
                     )
               ),
             testCase
               "without elif/with else"
-              ( parseString "if 1 do 2 else 3 end"
+              ( parseString "if 1 do 2 . else 3 . end"
                   @?= Right
                     ( Program
                         [ IfStmt
-                            [PushStmt (LitNumber 1)]
-                            [PushStmt (LitNumber 2)]
-                            [PushStmt (LitNumber 3)]
+                            { ifStmtCondition = ExprNumber 1,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 2}],
+                              ifStmtElseBody =
+                                Just
+                                  [ExprStmt {exprStmtBody = ExprNumber 3}]
+                            }
                         ]
                     )
               ),
             testCase
               "with elif/without else"
-              ( parseString "if 1 do 2 elif 3 do 4 end"
+              ( parseString "if 1 do 2 . elif 3 do 4 . end"
                   @?= Right
                     ( Program
                         [ IfStmt
-                            [PushStmt (LitNumber 1)]
-                            [PushStmt (LitNumber 2)]
-                            [IfStmt [PushStmt (LitNumber 3)] [PushStmt (LitNumber 4)] []]
+                            { ifStmtCondition = ExprNumber 1,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 2}],
+                              ifStmtElseBody =
+                                Just
+                                  [ IfStmt
+                                      { ifStmtCondition = ExprNumber 3,
+                                        ifStmtBody =
+                                          [ ExprStmt
+                                              { exprStmtBody = ExprNumber 4
+                                              }
+                                          ],
+                                        ifStmtElseBody = Nothing
+                                      }
+                                  ]
+                            }
                         ]
                     )
               ),
             testCase
               "with elif/else"
-              ( parseString "if 1 do 2 elif 3 do 4 else 5 end"
+              ( parseString "if 1 do 2 . elif 3 do 4 . else 5 . end"
                   @?= Right
                     ( Program
                         [ IfStmt
-                            [PushStmt (LitNumber 1)]
-                            [PushStmt (LitNumber 2)]
-                            [ IfStmt
-                                [PushStmt (LitNumber 3)]
-                                [PushStmt (LitNumber 4)]
-                                [PushStmt (LitNumber 5)]
-                            ]
+                            { ifStmtCondition = ExprNumber 1,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 2}],
+                              ifStmtElseBody =
+                                Just
+                                  [ IfStmt
+                                      { ifStmtCondition = ExprNumber 3,
+                                        ifStmtBody =
+                                          [ ExprStmt
+                                              { exprStmtBody = ExprNumber 4
+                                              }
+                                          ],
+                                        ifStmtElseBody =
+                                          Just
+                                            [ExprStmt {exprStmtBody = ExprNumber 5}]
+                                      }
+                                  ]
+                            }
                         ]
                     )
               ),
             testCase
               "with elif/else (advanced)"
               ( parseString
-                  "if 1 do 2 elif 3 do 4 elif 5 do 6 elif 7 do 8 else 9 if 10 do 11 end end if 12 do 13 elif 14 do 15 else 16 end"
+                  "if 1 do 2 . elif 3 do 4 . elif 5 do 6 . elif 7 do 8 . else 9 . if 10 do 11 . end end if 12 do 13 . elif 14 do 15 . else 16 . end"
                   @?= Right
                     ( Program
                         [ IfStmt
-                            [PushStmt (LitNumber 1)]
-                            [PushStmt (LitNumber 2)]
-                            [ IfStmt
-                                [PushStmt (LitNumber 3)]
-                                [PushStmt (LitNumber 4)]
-                                [ IfStmt
-                                    [PushStmt (LitNumber 5)]
-                                    [PushStmt (LitNumber 6)]
-                                    [ IfStmt
-                                        [PushStmt (LitNumber 7)]
-                                        [PushStmt (LitNumber 8)]
-                                        [ PushStmt (LitNumber 9),
-                                          IfStmt
-                                            [PushStmt (LitNumber 10)]
-                                            [PushStmt (LitNumber 11)]
-                                            []
-                                        ]
-                                    ]
-                                ]
-                            ],
+                            { ifStmtCondition = ExprNumber 1,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 2}],
+                              ifStmtElseBody =
+                                Just
+                                  [ IfStmt
+                                      { ifStmtCondition = ExprNumber 3,
+                                        ifStmtBody =
+                                          [ExprStmt {exprStmtBody = ExprNumber 4}],
+                                        ifStmtElseBody =
+                                          Just
+                                            [ IfStmt
+                                                { ifStmtCondition = ExprNumber 5,
+                                                  ifStmtBody =
+                                                    [ExprStmt {exprStmtBody = ExprNumber 6}],
+                                                  ifStmtElseBody =
+                                                    Just
+                                                      [ IfStmt
+                                                          { ifStmtCondition = ExprNumber 7,
+                                                            ifStmtBody =
+                                                              [ ExprStmt
+                                                                  { exprStmtBody = ExprNumber 8
+                                                                  }
+                                                              ],
+                                                            ifStmtElseBody =
+                                                              Just
+                                                                [ ExprStmt
+                                                                    { exprStmtBody = ExprNumber 9
+                                                                    },
+                                                                  IfStmt
+                                                                    { ifStmtCondition = ExprNumber 10,
+                                                                      ifStmtBody =
+                                                                        [ ExprStmt
+                                                                            { exprStmtBody = ExprNumber 11
+                                                                            }
+                                                                        ],
+                                                                      ifStmtElseBody = Nothing
+                                                                    }
+                                                                ]
+                                                          }
+                                                      ]
+                                                }
+                                            ]
+                                      }
+                                  ]
+                            },
                           IfStmt
-                            [PushStmt (LitNumber 12)]
-                            [PushStmt (LitNumber 13)]
-                            [ IfStmt
-                                [PushStmt (LitNumber 14)]
-                                [PushStmt (LitNumber 15)]
-                                [PushStmt (LitNumber 16)]
-                            ]
+                            { ifStmtCondition = ExprNumber 12,
+                              ifStmtBody = [ExprStmt {exprStmtBody = ExprNumber 13}],
+                              ifStmtElseBody =
+                                Just
+                                  [ IfStmt
+                                      { ifStmtCondition = ExprNumber 14,
+                                        ifStmtBody =
+                                          [ExprStmt {exprStmtBody = ExprNumber 15}],
+                                        ifStmtElseBody =
+                                          Just
+                                            [ExprStmt {exprStmtBody = ExprNumber 16}]
+                                      }
+                                  ]
+                            }
                         ]
                     )
               )
           ],
         testCase
           "while"
-          ( parseString "while 1 do 2 end"
+          ( parseString "while 1 do 2 . end"
               @?= Right
-                ( Program
-                    [WhileStmt [PushStmt (LitNumber 1)] [PushStmt (LitNumber 2)]]
-                )
+                (Program [WhileStmt (ExprNumber 1) [ExprStmt (ExprNumber 2)]])
           ),
         testCase
-          "macro"
-          ( parseString "macro test do 1 end"
-              @?= Right (Program [MacroStmt "test" [PushStmt (LitNumber 1)]])
+          "function"
+          ( parseString "func test() do return 1 . end"
+              @?= Right
+                ( Program
+                    [FunctionStmt "test" [] [ReturnStmt (Just (ExprNumber 1))]]
+                )
           )
       ]
   ]
