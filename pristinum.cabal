@@ -49,10 +49,21 @@ extra-source-files:
     CHANGELOG.md
     README.md
 
+common ghc-options
+    ghc-options:
+        -fno-warn-name-shadowing
+        -Wall
+        -Wcompat
+        -Wincomplete-uni-patterns
+
 library
+    import: ghc-options
+
     -- Modules exported by the library.
     exposed-modules:
         Pristinum.AST,
+        Pristinum.CLI,
+        Pristinum.Generator.C,
         Pristinum.Interpreter,
         Pristinum.Lexer,
         Pristinum.Parser
@@ -61,19 +72,31 @@ library
     -- other-modules:
 
     -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
+    default-extensions:
+        GeneralizedNewtypeDeriving,
+        LambdaCase
+        -- OverloadedStrings
 
     -- Other library packages from which modules are imported.
     build-depends:
         base ^>=4.14.3.0,
         array,
+        bytestring,
         containers,
+        directory,
+        filepath,
         lifted-base,
+        llvm-hs-pretty,
+        llvm-hs-pure,
         MissingH,
         mtl,
         optparse-applicative,
         parsec,
         pretty-simple,
+        prettyprinter,
+        process,
+        string-conversions,
+        text,
         transformers-base,
         vector
 
@@ -88,6 +111,8 @@ library
     default-language: Haskell2010
 
 executable pristinum
+    import: ghc-options
+
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
 
@@ -109,6 +134,8 @@ executable pristinum
     default-language: Haskell2010
 
 test-suite pristinum-test
+    import: ghc-options
+
     -- Base language which the package is written in.
     default-language: Haskell2010
 
@@ -124,6 +151,7 @@ test-suite pristinum-test
     -- Test dependencies.
     build-depends:
         base ^>=4.14.3.0,
-        tasty,
+        tasty-golden,
         tasty-hunit,
+        tasty,
         pristinum

@@ -1,7 +1,5 @@
 module Pristinum.AST where
 
-import Data.Int
-
 type Identifier = String
 
 newtype Program = Program [Stmt]

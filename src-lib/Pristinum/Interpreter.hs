@@ -1,20 +1,11 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-
 module Pristinum.Interpreter
   ( interpretString,
   )
 where
 
-import Control.Exception hiding
-  ( Exception,
-    evaluate,
-    throw,
-  )
 import Control.Monad
 import Control.Monad.Base
 import Control.Monad.Except
-import Control.Monad.IO.Class
 import Control.Monad.State.Strict
 import qualified Control.Monad.State.Strict as State
 import Data.Bits

@@ -1,4 +1,6 @@
-module Main where
+import Pristinum.CLI
 
+main :: IO ()
 main = do
-  putStrLn "Hello, Haskell!"
+  cli <- parseCli
+  print cli

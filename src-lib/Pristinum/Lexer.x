@@ -58,7 +58,7 @@ tokens :-
     0 [oO] [$octal] [$octal \_]*                 { \s -> TokenNumber (fst (head (readOct (replace "_" "" (tail (tail s)))))) }
     [$decimal] [$decimal \_]*                    { \s -> TokenNumber (fst (head (readDec (replace "_" "" s)))) }
     0 [xX] [$hexadecimal] [$hexadecimal \_]*     { \s -> TokenNumber (fst (head (readHex (replace "_" "" (tail (tail s)))))) }
-    \" .* \"                                     { \s -> TokenString (init (tail s)) }
+    \" (\\.|[^\"\\])* \"                         { \s -> TokenString (init (tail s)) }
     [$alpha $decimal \_]+                        { \s -> TokenIdentifier s }
 
 {
