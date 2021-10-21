@@ -1,0 +1,424 @@
+[ PT
+    ( Pn 0 1 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "func"
+            , tsID = 37
+            }
+        )
+    )
+, PT
+    ( Pn 5 1 6 )
+    ( T_IDENT "fib" )
+, PT
+    ( Pn 8 1 9 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 9 1 10 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 11 1 12 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 27
+            }
+        )
+    )
+, PT
+    ( Pn 12 1 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "u64"
+            , tsID = 50
+            }
+        )
+    )
+, PT
+    ( Pn 15 1 16 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 17 1 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 27
+            }
+        )
+    )
+, PT
+    ( Pn 18 1 19 )
+    ( TK
+        ( TokSymbol
+            { tsText = "u64"
+            , tsID = 50
+            }
+        )
+    )
+, PT
+    ( Pn 21 1 22 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":"
+            , tsID = 17
+            }
+        )
+    )
+, PT
+    ( Pn 27 2 5 )
+    ( TK
+        ( TokSymbol
+            { tsText = "if"
+            , tsID = 42
+            }
+        )
+    )
+, PT
+    ( Pn 30 2 8 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 32 2 10 )
+    ( TI "2" )
+, PT
+    ( Pn 34 2 12 )
+    ( TK
+        ( TokSymbol
+            { tsText = "<"
+            , tsID = 19
+            }
+        )
+    )
+, PT
+    ( Pn 35 2 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":"
+            , tsID = 17
+            }
+        )
+    )
+, PT
+    ( Pn 45 3 9 )
+    ( TK
+        ( TokSymbol
+            { tsText = "return"
+            , tsID = 44
+            }
+        )
+    )
+, PT
+    ( Pn 52 3 16 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 54 3 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 15
+            }
+        )
+    )
+, PT
+    ( Pn 60 4 5 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 33
+            }
+        )
+    )
+, PT
+    ( Pn 68 5 5 )
+    ( TK
+        ( TokSymbol
+            { tsText = "return"
+            , tsID = 44
+            }
+        )
+    )
+, PT
+    ( Pn 75 5 12 )
+    ( T_IDENT "fib" )
+, PT
+    ( Pn 78 5 15 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 79 5 16 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 81 5 18 )
+    ( TI "1" )
+, PT
+    ( Pn 83 5 20 )
+    ( TK
+        ( TokSymbol
+            { tsText = "-"
+            , tsID = 13
+            }
+        )
+    )
+, PT
+    ( Pn 84 5 21 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 86 5 23 )
+    ( T_IDENT "fib" )
+, PT
+    ( Pn 89 5 26 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 90 5 27 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 92 5 29 )
+    ( TI "2" )
+, PT
+    ( Pn 94 5 31 )
+    ( TK
+        ( TokSymbol
+            { tsText = "-"
+            , tsID = 13
+            }
+        )
+    )
+, PT
+    ( Pn 95 5 32 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 97 5 34 )
+    ( TK
+        ( TokSymbol
+            { tsText = "+"
+            , tsID = 10
+            }
+        )
+    )
+, PT
+    ( Pn 99 5 36 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 15
+            }
+        )
+    )
+, PT
+    ( Pn 101 6 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 33
+            }
+        )
+    )
+, PT
+    ( Pn 106 8 1 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 108 8 3 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 27
+            }
+        )
+    )
+, PT
+    ( Pn 109 8 4 )
+    ( TK
+        ( TokSymbol
+            { tsText = "u64"
+            , tsID = 50
+            }
+        )
+    )
+, PT
+    ( Pn 113 8 8 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":="
+            , tsID = 18
+            }
+        )
+    )
+, PT
+    ( Pn 116 8 11 )
+    ( TI "1" )
+, PT
+    ( Pn 118 8 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 15
+            }
+        )
+    )
+, PT
+    ( Pn 120 9 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "while"
+            , tsID = 54
+            }
+        )
+    )
+, PT
+    ( Pn 126 9 7 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 128 9 9 )
+    ( TI "15" )
+, PT
+    ( Pn 131 9 12 )
+    ( TK
+        ( TokSymbol
+            { tsText = "<"
+            , tsID = 19
+            }
+        )
+    )
+, PT
+    ( Pn 132 9 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":"
+            , tsID = 17
+            }
+        )
+    )
+, PT
+    ( Pn 138 10 5 )
+    ( T_IDENT "print" )
+, PT
+    ( Pn 143 10 10 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 144 10 11 )
+    ( T_IDENT "fib" )
+, PT
+    ( Pn 147 10 14 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 148 10 15 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 149 10 16 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 150 10 17 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 152 10 19 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 15
+            }
+        )
+    )
+, PT
+    ( Pn 158 11 5 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 160 11 7 )
+    ( TK
+        ( TokSymbol
+            { tsText = "="
+            , tsID = 22
+            }
+        )
+    )
+, PT
+    ( Pn 162 11 9 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 164 11 11 )
+    ( TI "1" )
+, PT
+    ( Pn 166 11 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "+"
+            , tsID = 10
+            }
+        )
+    )
+, PT
+    ( Pn 168 11 15 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 15
+            }
+        )
+    )
+, PT
+    ( Pn 170 12 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 33
+            }
+        )
+    )
+]

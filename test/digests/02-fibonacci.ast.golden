@@ -1,0 +1,72 @@
+PProgram
+    [ SFunction
+        ( IDENT "fib" )
+        [ BBind
+            ( IDENT "n" ) TUint64
+        ] TUint64
+        [ SIf
+            ( ELess
+                ( EIdent
+                    ( IDENT "n" )
+                )
+                ( EInt 2 )
+            )
+            [ SReturn
+                ( EIdent
+                    ( IDENT "n" )
+                )
+            ] []
+        , SReturn
+            ( EAdd
+                ( ECall
+                    ( IDENT "fib" )
+                    [ ESubtract
+                        ( EIdent
+                            ( IDENT "n" )
+                        )
+                        ( EInt 1 )
+                    ]
+                )
+                ( ECall
+                    ( IDENT "fib" )
+                    [ ESubtract
+                        ( EIdent
+                            ( IDENT "n" )
+                        )
+                        ( EInt 2 )
+                    ]
+                )
+            )
+        ]
+    , SBind
+        ( BBind
+            ( IDENT "n" ) TUint64
+        )
+        ( EInt 1 )
+    , SWhile
+        ( ELess
+            ( EIdent
+                ( IDENT "n" )
+            )
+            ( EInt 15 )
+        )
+        [ SExpr
+            ( ECall
+                ( IDENT "print" )
+                [ ECall
+                    ( IDENT "fib" )
+                    [ EIdent
+                        ( IDENT "n" )
+                    ]
+                ]
+            )
+        , SAssign
+            ( IDENT "n" )
+            ( EAdd
+                ( EIdent
+                    ( IDENT "n" )
+                )
+                ( EInt 1 )
+            )
+        ]
+    ]
