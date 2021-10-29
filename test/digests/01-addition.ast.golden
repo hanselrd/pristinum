@@ -1,7 +1,0 @@
-PProgram
-    [ SExpr
-        ( EAdd
-            ( EInt 12 )
-            ( EInt 3 )
-        )
-    ]

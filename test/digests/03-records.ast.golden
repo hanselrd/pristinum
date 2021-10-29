@@ -1,0 +1,46 @@
+PProgram
+    [ PURecord
+        ( RRecord RTStruct
+            ( IDENT "Point" )
+            [ BBind
+                ( IDENT "x" ) TFloat64
+            , BBind
+                ( IDENT "y" ) TFloat64
+            ]
+        )
+    , PUFunction
+        ( FFunction
+            ( IDENT "main" ) [] TVoid
+            [ SBind
+                ( BBind
+                    ( IDENT "p" )
+                    ( TRecord
+                        ( IDENT "Point" )
+                    )
+                )
+                ( EIdent
+                    ( IDENT "Point" )
+                )
+            , SAssign
+                ( EBinOpPost
+                    ( EIdent
+                        ( IDENT "p" )
+                    )
+                    ( EIdent
+                        ( IDENT "x" )
+                    ) BOAccess
+                )
+                ( EDouble 1.0 )
+            , SAssign
+                ( EBinOpPost
+                    ( EIdent
+                        ( IDENT "p" )
+                    )
+                    ( EIdent
+                        ( IDENT "y" )
+                    ) BOAccess
+                )
+                ( EDouble 2.0 )
+            ]
+        )
+    ]

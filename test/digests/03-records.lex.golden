@@ -1,0 +1,283 @@
+[ PT
+    ( Pn 0 1 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "struct"
+            , tsID = 53
+            }
+        )
+    )
+, PT
+    ( Pn 7 1 8 )
+    ( T_IDENT "Point" )
+, PT
+    ( Pn 12 1 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":"
+            , tsID = 18
+            }
+        )
+    )
+, PT
+    ( Pn 18 2 5 )
+    ( T_IDENT "x" )
+, PT
+    ( Pn 20 2 7 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 29
+            }
+        )
+    )
+, PT
+    ( Pn 21 2 8 )
+    ( TK
+        ( TokSymbol
+            { tsText = "f64"
+            , tsID = 42
+            }
+        )
+    )
+, PT
+    ( Pn 24 2 11 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 30 3 5 )
+    ( T_IDENT "y" )
+, PT
+    ( Pn 32 3 7 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 29
+            }
+        )
+    )
+, PT
+    ( Pn 33 3 8 )
+    ( TK
+        ( TokSymbol
+            { tsText = "f64"
+            , tsID = 42
+            }
+        )
+    )
+, PT
+    ( Pn 36 3 11 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 38 4 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 40
+            }
+        )
+    )
+, PT
+    ( Pn 43 6 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "func"
+            , tsID = 44
+            }
+        )
+    )
+, PT
+    ( Pn 48 6 6 )
+    ( T_IDENT "main" )
+, PT
+    ( Pn 52 6 10 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 53 6 11 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 55 6 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 29
+            }
+        )
+    )
+, PT
+    ( Pn 56 6 14 )
+    ( TK
+        ( TokSymbol
+            { tsText = "void"
+            , tsID = 60
+            }
+        )
+    )
+, PT
+    ( Pn 60 6 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":"
+            , tsID = 18
+            }
+        )
+    )
+, PT
+    ( Pn 66 7 5 )
+    ( T_IDENT "p" )
+, PT
+    ( Pn 68 7 7 )
+    ( TK
+        ( TokSymbol
+            { tsText = "@"
+            , tsID = 29
+            }
+        )
+    )
+, PT
+    ( Pn 69 7 8 )
+    ( T_IDENT "Point" )
+, PT
+    ( Pn 75 7 14 )
+    ( TK
+        ( TokSymbol
+            { tsText = ":="
+            , tsID = 19
+            }
+        )
+    )
+, PT
+    ( Pn 78 7 17 )
+    ( T_IDENT "Point" )
+, PT
+    ( Pn 83 7 22 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 89 8 5 )
+    ( T_IDENT "p" )
+, PT
+    ( Pn 91 8 7 )
+    ( T_IDENT "x" )
+, PT
+    ( Pn 93 8 9 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 16
+            }
+        )
+    )
+, PT
+    ( Pn 94 8 10 )
+    ( TK
+        ( TokSymbol
+            { tsText = "``"
+            , tsID = 34
+            }
+        )
+    )
+, PT
+    ( Pn 97 8 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "="
+            , tsID = 24
+            }
+        )
+    )
+, PT
+    ( Pn 99 8 15 )
+    ( TD "1.0" )
+, PT
+    ( Pn 102 8 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 108 9 5 )
+    ( T_IDENT "p" )
+, PT
+    ( Pn 110 9 7 )
+    ( T_IDENT "y" )
+, PT
+    ( Pn 112 9 9 )
+    ( TK
+        ( TokSymbol
+            { tsText = "."
+            , tsID = 16
+            }
+        )
+    )
+, PT
+    ( Pn 113 9 10 )
+    ( TK
+        ( TokSymbol
+            { tsText = "``"
+            , tsID = 34
+            }
+        )
+    )
+, PT
+    ( Pn 116 9 13 )
+    ( TK
+        ( TokSymbol
+            { tsText = "="
+            , tsID = 24
+            }
+        )
+    )
+, PT
+    ( Pn 118 9 15 )
+    ( TD "2.0" )
+, PT
+    ( Pn 121 9 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 123 10 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 40
+            }
+        )
+    )
+]

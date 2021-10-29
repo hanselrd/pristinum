@@ -1,86 +1,103 @@
-token IDENT (letter | '_') (letter | digit | '_')*;
+token IDENT ((letter | '_') (letter | digit | '_')*);
 
 comment "//";
 comment "/*" "*/";
 
-PProgram.      Program ::= [Stmt];
+PProgram.       Program ::= [ProgramUnit];
 
-SExpr.         Stmt ::= Expr ".";
-SBind.         Stmt ::= Bind ":=" Expr ".";
-SAssign.       Stmt ::= IDENT "=" Expr ".";
-SIf.           Stmt ::= "if" Expr ":" [Stmt] [ElifStmt] "end";
-SIfElse.       Stmt ::= "if" Expr ":" [Stmt] [ElifStmt] "else" [Stmt] "end";
-SWhile.        Stmt ::= "while" Expr ":" [Stmt] "end";
-SReturn.       Stmt ::= "return" Expr ".";
-SReturnVoid.   Stmt ::= "return" ".";
-SFunction.     Stmt ::= "func" IDENT "(" [Bind1] ")" "@" Type ":" [Stmt] "end";
-SStruct.       Stmt ::= "struct" IDENT ":" [Bind2] "end";
-SUnion.        Stmt ::= "union" IDENT ":" [Bind2] "end";
-terminator     Stmt "";
+PURecord.       ProgramUnit ::= Record;
+PUBind.         ProgramUnit ::= Bind ":=" Expr ";";
+PUBindVoid.     ProgramUnit ::= Bind ";";
+PUFunction.     ProgramUnit ::= Function;
+terminator      ProgramUnit "";
 
-ESElif.        ElifStmt ::= "elif" Expr ":" [Stmt];
-terminator     ElifStmt "";
+RRecord.        Record ::= RecordType IDENT ":" [Bind2] "end";
 
-ENil.          Expr ::= "nil";
-ETrue.         Expr ::= "true";
-EFalse.        Expr ::= "false";
-EChar.         Expr ::= Char;
-EInt.          Expr ::= Integer;
-EDouble.       Expr ::= Double;
-EString.       Expr ::= String;
-EIdent.        Expr ::= IDENT;
-ECall.         Expr ::= IDENT "(" [Expr] ")";
---ECast.         Expr ::= "<" Type ">" Expr; --12 sr
---EAccess.       Expr ::= Expr "#" Expr; --12 sr
---EPAccess.      Expr ::= Expr "##" Expr; --12 sr
---EDeref.        Expr ::= "*" Expr; --22 sr
---ERef.          Expr ::= "&" Expr; --22 sr
-ESizeof.       Expr ::= "sizeof" "(" Type ")";
---ENegative.     Expr ::= Expr "-"; --29 sr
-EDecr.         Expr ::= Expr "--";
-EIncr.         Expr ::= Expr "++";
-EBitNot.       Expr ::= Expr "~";
-ENot.          Expr ::= Expr "!";
-EAdd.          Expr ::= Expr Expr "+";
-ESubtract.     Expr ::= Expr Expr "-";
-EMultiply.     Expr ::= Expr Expr "*";
-EDivide.       Expr ::= Expr Expr "/";
-EMod.          Expr ::= Expr Expr "%";
-EPower.        Expr ::= Expr Expr "**";
-EBitShl.       Expr ::= Expr Expr "<<";
-EBitShr.       Expr ::= Expr Expr ">>";
-EBitAnd.       Expr ::= Expr Expr "&";
-EBitOr.        Expr ::= Expr Expr "|";
-EBitXor.       Expr ::= Expr Expr "^";
-EEqual.        Expr ::= Expr Expr "==";
-ENotEqual.     Expr ::= Expr Expr "!=";
-ELess.         Expr ::= Expr Expr "<";
-EGreater.      Expr ::= Expr Expr ">";
-ELessEqual.    Expr ::= Expr Expr "<=";
-EGreaterEqual. Expr ::= Expr Expr ">=";
-EAnd.          Expr ::= Expr Expr "&&";
-EOr.           Expr ::= Expr Expr "||";
-separator      Expr ",";
+RTStruct.       RecordType ::= "struct";
+RTUnion.        RecordType ::= "union";
 
-BBind.         Bind ::= IDENT "@" Type;
-_.             Bind1 ::= Bind;
-_.             Bind2 ::= Bind;
-separator      Bind1 ",";
-terminator     nonempty Bind2 ".";
+FFunction.      Function ::= "func" IDENT "(" [Bind1] ")" "@" Type ":" [Stmt] "end";
 
-TVoid.         Type ::= "void";
-TBool.         Type ::= "bool";
-TChar.         Type ::= "char";
-TInt8.         Type ::= "i8";
-TInt16.        Type ::= "i16";
-TInt32.        Type ::= "i32";
-TInt64.        Type ::= "i64";
-TUint8.        Type ::= "u8";
-TUint16.       Type ::= "u16";
-TUint32.       Type ::= "u32";
-TUint64.       Type ::= "u64";
-TFloat32.      Type ::= "f32";
-TFloat64.      Type ::= "f64";
-TPointer.      Type ::= Type "*";
-TStruct.       Type ::= "struct" IDENT;
-TUnion.        Type ::= "union" IDENT;
+SExpr.          Stmt ::= Expr ";";
+SBind.          Stmt ::= Bind ":=" Expr ";";
+SBindVoid.      Stmt ::= Bind ";";
+SIf.            Stmt ::= "if" Expr ":" [Stmt] [ElifStmt] "end";
+SIfElse.        Stmt ::= "if" Expr ":" [Stmt] [ElifStmt] "else" [Stmt] "end";
+SWhile.         Stmt ::= "while" Expr ":" [Stmt] "end";
+SReturn.        Stmt ::= "return" Expr ";";
+SReturnVoid.    Stmt ::= "return" ";";
+terminator      Stmt "";
+
+ESElif.         ElifStmt ::= "elif" Expr ":" [Stmt];
+terminator      ElifStmt "";
+
+EAssign.        Expr ::= Expr1 "=" Expr;
+ELOr.           Expr1 ::= Expr1 "||" Expr2;
+ELAnd.          Expr2 ::= Expr2 "&&" Expr3;
+EBOr.           Expr3 ::= Expr3 "|" Expr4;
+EBXor.          Expr4 ::= Expr4 "^" Expr5;
+EBAnd.          Expr5 ::= Expr5 "&" Expr6;
+EEqual.         Expr6 ::= Expr6 "==" Expr7;
+ENotEqual.      Expr6 ::= Expr6 "!=" Expr7;
+ELess.          Expr7 ::= Expr7 "<" Expr8;
+ELessEqual.     Expr7 ::= Expr7 "<=" Expr8;
+EGreater.       Expr7 ::= Expr7 ">" Expr8;
+EGreaterEqual.  Expr7 ::= Expr7 ">=" Expr8;
+EBShl.          Expr8 ::= Expr8 "<<" Expr9;
+EBShr.          Expr8 ::= Expr8 ">>" Expr9;
+EAdd.           Expr9  ::= Expr9 "+" Expr10;
+ESubstract.     Expr9  ::= Expr9 "-" Expr10;
+EPower.         Expr10 ::= Expr10 "**" Expr11;
+EMultiply.      Expr10 ::= Expr10 "*" Expr11;
+EDivide.        Expr10 ::= Expr10 "/" Expr11;
+EMod.           Expr10 ::= Expr10 "%" Expr11;
+EIncr.          Expr11 ::= "++" Expr11;
+EDecr.          Expr11 ::= "--" Expr11;
+EPos.           Expr11 ::= "+" Expr11;
+ENeg.           Expr11 ::= "-" Expr11;
+ELNot.          Expr11 ::= "!" Expr11;
+EBNot.          Expr11 ::= "~" Expr11;
+ECast.          Expr11 ::= "cast" "<" Type ">" "(" Expr ")";
+EDeref.         Expr11 ::= "*" Expr11;
+ERef.           Expr11 ::= "&" Expr11;
+ESizeof.        Expr11 ::= "sizeof" "(" Type ")";
+EAlignof.       Expr11 ::= "alignof" "(" Type ")";
+EPIncr.         Expr12 ::= Expr12 "++";
+EPDecr.         Expr12 ::= Expr12 "--";
+ECall.          Expr12 ::= Expr13 "(" [Expr] ")";
+EIndex.         Expr12 ::= Expr13 "[" Expr "]";
+EAccess.        Expr12 ::= Expr12 "." Expr13;
+EPAccess.       Expr12 ::= Expr12 "->" Expr13;
+ENil.           Expr13 ::= "nil";
+ETrue.          Expr13 ::= "true";
+EFalse.         Expr13 ::= "false";
+EChar.          Expr13 ::= Char;
+EInt.           Expr13 ::= Integer;
+EDouble.        Expr13 ::= Double;
+EString.        Expr13 ::= String;
+EIdent.         Expr13 ::= IDENT;
+coercions       Expr 13;
+separator       Expr ",";
+
+BBind.          Bind ::= IDENT "@" Type;
+_.              Bind1 ::= Bind;
+_.              Bind2 ::= Bind;
+separator       Bind1 ",";
+terminator      nonempty Bind2 ";";
+
+TVoid.          Type ::= "void";
+TBool.          Type ::= "bool";
+TChar.          Type ::= "char";
+TInt8.          Type ::= "i8";
+TInt16.         Type ::= "i16";
+TInt32.         Type ::= "i32";
+TInt64.         Type ::= "i64";
+TUint8.         Type ::= "u8";
+TUint16.        Type ::= "u16";
+TUint32.        Type ::= "u32";
+TUint64.        Type ::= "u64";
+TFloat32.       Type ::= "f32";
+TFloat64.       Type ::= "f64";
+TPointer.       Type ::= Type "*";
+TArray.         Type ::= "[" Type "]";
+TIdent.         Type ::= IDENT;

@@ -22,3 +22,8 @@ cabal.project.local~
 .HTF/
 .ghc.environment.*
 *.bak
+# src-lib/Codegen/Pristinum
+# !src-lib/Codegen/Pristinum/Abs.hs
+# !src-lib/Codegen/Pristinum/Lex.x
+# !src-lib/Codegen/Pristinum/Par.y
+# !src-lib/Codegen/Pristinum/Print.hs

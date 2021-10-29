@@ -1,12 +1,14 @@
 func fib(n @u64) @u64:
-    if n 2 <:
-        return n .
+    if n 2 <``:
+        return n;
     end
-    return fib(n 1 -) fib(n 2 -) + .
+    return fib(n 1 -``) fib(n 2 -``) +``;
 end
 
-n @u64 := 1 .
-while n 15 <:
-    print(fib(n)) .
-    n = n 1 + .
+func main() @void:
+    n @u64 := 1;
+    while n 15 <``:
+        print(fib(n));
+        n = n ++`;
+    end
 end

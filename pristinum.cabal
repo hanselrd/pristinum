@@ -55,9 +55,14 @@ common ghc-options
         -Wall
         -Wcompat
         -Wincomplete-uni-patterns
+        -Wno-unused-matches
+        -threaded
+        -rtsopts
+        -with-rtsopts=-N
 
 common default-extensions
     default-extensions:
+        FlexibleContexts,
         GeneralizedNewtypeDeriving,
         LambdaCase,
         OverloadedStrings
@@ -91,7 +96,7 @@ library
         Codegen.Pristinum.Abs,
         Codegen.Pristinum.Lex,
         Codegen.Pristinum.Par,
-        Codegen.Pristinum.Print,
+        Pristinum.SAbs,
         Pristinum
 
     -- Modules included in this library but not exported.

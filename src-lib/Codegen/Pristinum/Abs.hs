@@ -19,28 +19,78 @@ import qualified Prelude as C
     Show,
   )
 
-data Program = PProgram [Stmt]
+data Program = PProgram [ProgramUnit]
+  deriving (C.Eq, C.Ord, C.Show, C.Read)
+
+data ProgramUnit
+  = PURecord Record
+  | PUBind Bind Expr
+  | PUBindVoid Bind
+  | PUFunction Function
+  deriving (C.Eq, C.Ord, C.Show, C.Read)
+
+data Record = RRecord RecordType IDENT [Bind]
+  deriving (C.Eq, C.Ord, C.Show, C.Read)
+
+data RecordType = RTStruct | RTUnion
+  deriving (C.Eq, C.Ord, C.Show, C.Read)
+
+data Function = FFunction IDENT [Bind] Type [Stmt]
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data Stmt
   = SExpr Expr
   | SBind Bind Expr
-  | SAssign IDENT Expr
+  | SBindVoid Bind
   | SIf Expr [Stmt] [ElifStmt]
   | SIfElse Expr [Stmt] [ElifStmt] [Stmt]
   | SWhile Expr [Stmt]
   | SReturn Expr
   | SReturnVoid
-  | SFunction IDENT [Bind] Type [Stmt]
-  | SStruct IDENT [Bind]
-  | SUnion IDENT [Bind]
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data ElifStmt = ESElif Expr [Stmt]
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data Expr
-  = ENil
+  = EAssign Expr Expr
+  | ELOr Expr Expr
+  | ELAnd Expr Expr
+  | EBOr Expr Expr
+  | EBXor Expr Expr
+  | EBAnd Expr Expr
+  | EEqual Expr Expr
+  | ENotEqual Expr Expr
+  | ELess Expr Expr
+  | ELessEqual Expr Expr
+  | EGreater Expr Expr
+  | EGreaterEqual Expr Expr
+  | EBShl Expr Expr
+  | EBShr Expr Expr
+  | EAdd Expr Expr
+  | ESubstract Expr Expr
+  | EPower Expr Expr
+  | EMultiply Expr Expr
+  | EDivide Expr Expr
+  | EMod Expr Expr
+  | EIncr Expr
+  | EDecr Expr
+  | EPos Expr
+  | ENeg Expr
+  | ELNot Expr
+  | EBNot Expr
+  | ECast Type Expr
+  | EDeref Expr
+  | ERef Expr
+  | ESizeof Type
+  | EAlignof Type
+  | EPIncr Expr
+  | EPDecr Expr
+  | ECall Expr [Expr]
+  | EIndex Expr Expr
+  | EAccess Expr Expr
+  | EPAccess Expr Expr
+  | ENil
   | ETrue
   | EFalse
   | EChar Char
@@ -48,31 +98,6 @@ data Expr
   | EDouble Double
   | EString String
   | EIdent IDENT
-  | ECall IDENT [Expr]
-  | ESizeof Type
-  | EDecr Expr
-  | EIncr Expr
-  | EBitNot Expr
-  | ENot Expr
-  | EAdd Expr Expr
-  | ESubtract Expr Expr
-  | EMultiply Expr Expr
-  | EDivide Expr Expr
-  | EMod Expr Expr
-  | EPower Expr Expr
-  | EBitShl Expr Expr
-  | EBitShr Expr Expr
-  | EBitAnd Expr Expr
-  | EBitOr Expr Expr
-  | EBitXor Expr Expr
-  | EEqual Expr Expr
-  | ENotEqual Expr Expr
-  | ELess Expr Expr
-  | EGreater Expr Expr
-  | ELessEqual Expr Expr
-  | EGreaterEqual Expr Expr
-  | EAnd Expr Expr
-  | EOr Expr Expr
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 data Bind = BBind IDENT Type
@@ -93,8 +118,8 @@ data Type
   | TFloat32
   | TFloat64
   | TPointer Type
-  | TStruct IDENT
-  | TUnion IDENT
+  | TArray Type
+  | TIdent IDENT
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 
 newtype IDENT = IDENT Data.Text.Text

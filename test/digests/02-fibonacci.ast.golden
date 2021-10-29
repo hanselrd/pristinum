@@ -1,72 +1,80 @@
 PProgram
-    [ SFunction
-        ( IDENT "fib" )
-        [ BBind
-            ( IDENT "n" ) TUint64
-        ] TUint64
-        [ SIf
-            ( ELess
-                ( EIdent
-                    ( IDENT "n" )
-                )
-                ( EInt 2 )
-            )
-            [ SReturn
-                ( EIdent
-                    ( IDENT "n" )
-                )
-            ] []
-        , SReturn
-            ( EAdd
-                ( ECall
-                    ( IDENT "fib" )
-                    [ ESubtract
-                        ( EIdent
-                            ( IDENT "n" )
-                        )
-                        ( EInt 1 )
-                    ]
-                )
-                ( ECall
-                    ( IDENT "fib" )
-                    [ ESubtract
-                        ( EIdent
-                            ( IDENT "n" )
-                        )
-                        ( EInt 2 )
-                    ]
-                )
-            )
-        ]
-    , SBind
-        ( BBind
-            ( IDENT "n" ) TUint64
-        )
-        ( EInt 1 )
-    , SWhile
-        ( ELess
-            ( EIdent
-                ( IDENT "n" )
-            )
-            ( EInt 15 )
-        )
-        [ SExpr
-            ( ECall
-                ( IDENT "print" )
-                [ ECall
-                    ( IDENT "fib" )
-                    [ EIdent
+    [ PUFunction
+        ( FFunction
+            ( IDENT "fib" )
+            [ BBind
+                ( IDENT "n" ) TUint64
+            ] TUint64
+            [ SIf
+                ( EBinOpPost
+                    ( EIdent
                         ( IDENT "n" )
-                    ]
-                ]
-            )
-        , SAssign
-            ( IDENT "n" )
-            ( EAdd
-                ( EIdent
-                    ( IDENT "n" )
+                    )
+                    ( EInt 2 ) BOLess
+                )
+                [ SReturn
+                    ( EIdent
+                        ( IDENT "n" )
+                    )
+                ] []
+            , SReturn
+                ( EBinOpPost
+                    ( ECall
+                        ( IDENT "fib" )
+                        [ EBinOpPost
+                            ( EIdent
+                                ( IDENT "n" )
+                            )
+                            ( EInt 1 ) BOSubtract
+                        ]
+                    )
+                    ( ECall
+                        ( IDENT "fib" )
+                        [ EBinOpPost
+                            ( EIdent
+                                ( IDENT "n" )
+                            )
+                            ( EInt 2 ) BOSubtract
+                        ]
+                    ) BOAdd
+                )
+            ]
+        )
+    , PUFunction
+        ( FFunction
+            ( IDENT "main" ) [] TVoid
+            [ SBind
+                ( BBind
+                    ( IDENT "n" ) TUint64
                 )
                 ( EInt 1 )
-            )
-        ]
+            , SWhile
+                ( EBinOpPost
+                    ( EIdent
+                        ( IDENT "n" )
+                    )
+                    ( EInt 15 ) BOLess
+                )
+                [ SExpr
+                    ( ECall
+                        ( IDENT "print" )
+                        [ ECall
+                            ( IDENT "fib" )
+                            [ EIdent
+                                ( IDENT "n" )
+                            ]
+                        ]
+                    )
+                , SAssign
+                    ( EIdent
+                        ( IDENT "n" )
+                    )
+                    ( EUnOpPost
+                        ( EIdent
+                            ( IDENT "n" )
+                        ) UOIncr
+                    )
+                ]
+            ]
+        )
     ]

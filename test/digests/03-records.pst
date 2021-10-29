@@ -1,0 +1,10 @@
+struct Point:
+    x @f64;
+    y @f64;
+end
+
+func main() @void:
+    p @Point := Point;
+    p x .`` = 1.0;
+    p y .`` = 2.0;
+end
