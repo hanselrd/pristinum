@@ -14,33 +14,37 @@ PProgram
             [ SBind
                 ( BBind
                     ( IDENT "p" )
-                    ( TRecord
+                    ( TIdent
                         ( IDENT "Point" )
                     )
                 )
                 ( EIdent
                     ( IDENT "Point" )
                 )
-            , SAssign
-                ( EBinOpPost
-                    ( EIdent
-                        ( IDENT "p" )
+            , SExpr
+                ( EAssign
+                    ( EAccess
+                        ( EIdent
+                            ( IDENT "p" )
+                        )
+                        ( EIdent
+                            ( IDENT "x" )
+                        )
                     )
-                    ( EIdent
-                        ( IDENT "x" )
-                    ) BOAccess
+                    ( EDouble 1.0 )
                 )
-                ( EDouble 1.0 )
-            , SAssign
-                ( EBinOpPost
-                    ( EIdent
-                        ( IDENT "p" )
+            , SExpr
+                ( EAssign
+                    ( EAccess
+                        ( EIdent
+                            ( IDENT "p" )
+                        )
+                        ( EIdent
+                            ( IDENT "y" )
+                        )
                     )
-                    ( EIdent
-                        ( IDENT "y" )
-                    ) BOAccess
+                    ( EDouble 2.0 )
                 )
-                ( EDouble 2.0 )
             ]
         )
     ]

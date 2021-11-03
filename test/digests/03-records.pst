@@ -5,6 +5,6 @@ end
 
 func main() @void:
     p @Point := Point;
-    p x .`` = 1.0;
-    p y .`` = 2.0;
+    p.x= 1.0;
+    p.y = 2.0;
 end

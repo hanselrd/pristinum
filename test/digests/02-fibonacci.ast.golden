@@ -3,14 +3,20 @@ PProgram
         ( FFunction
             ( IDENT "fib" )
             [ BBind
-                ( IDENT "n" ) TUint64
-            ] TUint64
+                ( IDENT "n" )
+                ( TIdent
+                    ( IDENT "u64" )
+                )
+            ]
+            ( TIdent
+                ( IDENT "u64" )
+            )
             [ SIf
-                ( EBinOpPost
+                ( ELess
                     ( EIdent
                         ( IDENT "n" )
                     )
-                    ( EInt 2 ) BOLess
+                    ( EInt 2 )
                 )
                 [ SReturn
                     ( EIdent
@@ -18,25 +24,25 @@ PProgram
                     )
                 ] []
             , SReturn
-                ( EBinOpPost
+                ( EAdd
                     ( ECall
                         ( IDENT "fib" )
-                        [ EBinOpPost
+                        [ ESubtract
                             ( EIdent
                                 ( IDENT "n" )
                             )
-                            ( EInt 1 ) BOSubtract
+                            ( EInt 1 )
                         ]
                     )
                     ( ECall
                         ( IDENT "fib" )
-                        [ EBinOpPost
+                        [ ESubtract
                             ( EIdent
                                 ( IDENT "n" )
                             )
-                            ( EInt 2 ) BOSubtract
+                            ( EInt 2 )
                         ]
-                    ) BOAdd
+                    )
                 )
             ]
         )
@@ -45,15 +51,18 @@ PProgram
             ( IDENT "main" ) [] TVoid
             [ SBind
                 ( BBind
-                    ( IDENT "n" ) TUint64
+                    ( IDENT "n" )
+                    ( TIdent
+                        ( IDENT "u64" )
+                    )
                 )
                 ( EInt 1 )
             , SWhile
-                ( EBinOpPost
+                ( ELess
                     ( EIdent
                         ( IDENT "n" )
                     )
-                    ( EInt 15 ) BOLess
+                    ( EInt 15 )
                 )
                 [ SExpr
                     ( ECall
@@ -65,14 +74,11 @@ PProgram
                             ]
                         ]
                     )
-                , SAssign
-                    ( EIdent
-                        ( IDENT "n" )
-                    )
-                    ( EUnOpPost
+                , SExpr
+                    ( EIncr
                         ( EIdent
                             ( IDENT "n" )
-                        ) UOIncr
+                        )
                     )
                 ]
             ]

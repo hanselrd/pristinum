@@ -3,7 +3,7 @@
     ( TK
         ( TokSymbol
             { tsText = "struct"
-            , tsID = 53
+            , tsID = 48
             }
         )
     )
@@ -36,7 +36,7 @@
     ( TK
         ( TokSymbol
             { tsText = "f64"
-            , tsID = 42
+            , tsID = 40
             }
         )
     )
@@ -66,7 +66,7 @@
     ( TK
         ( TokSymbol
             { tsText = "f64"
-            , tsID = 42
+            , tsID = 40
             }
         )
     )
@@ -84,7 +84,7 @@
     ( TK
         ( TokSymbol
             { tsText = "end"
-            , tsID = 40
+            , tsID = 39
             }
         )
     )
@@ -93,7 +93,7 @@
     ( TK
         ( TokSymbol
             { tsText = "func"
-            , tsID = 44
+            , tsID = 42
             }
         )
     )
@@ -132,7 +132,7 @@
     ( TK
         ( TokSymbol
             { tsText = "void"
-            , tsID = 60
+            , tsID = 51
             }
         )
     )
@@ -185,40 +185,31 @@
     ( Pn 89 8 5 )
     ( T_IDENT "p" )
 , PT
-    ( Pn 91 8 7 )
-    ( T_IDENT "x" )
-, PT
-    ( Pn 93 8 9 )
+    ( Pn 90 8 6 )
     ( TK
         ( TokSymbol
             { tsText = "."
             , tsID = 16
+            }
+        )
+    )
+, PT
+    ( Pn 91 8 7 )
+    ( T_IDENT "x" )
+, PT
+    ( Pn 92 8 8 )
+    ( TK
+        ( TokSymbol
+            { tsText = "="
+            , tsID = 24
             }
         )
     )
 , PT
     ( Pn 94 8 10 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
-, PT
-    ( Pn 97 8 13 )
-    ( TK
-        ( TokSymbol
-            { tsText = "="
-            , tsID = 24
-            }
-        )
-    )
-, PT
-    ( Pn 99 8 15 )
     ( TD "1.0" )
 , PT
-    ( Pn 102 8 18 )
+    ( Pn 97 8 13 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -227,13 +218,10 @@
         )
     )
 , PT
-    ( Pn 108 9 5 )
+    ( Pn 103 9 5 )
     ( T_IDENT "p" )
 , PT
-    ( Pn 110 9 7 )
-    ( T_IDENT "y" )
-, PT
-    ( Pn 112 9 9 )
+    ( Pn 104 9 6 )
     ( TK
         ( TokSymbol
             { tsText = "."
@@ -242,16 +230,10 @@
         )
     )
 , PT
-    ( Pn 113 9 10 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
+    ( Pn 105 9 7 )
+    ( T_IDENT "y" )
 , PT
-    ( Pn 116 9 13 )
+    ( Pn 107 9 9 )
     ( TK
         ( TokSymbol
             { tsText = "="
@@ -260,10 +242,10 @@
         )
     )
 , PT
-    ( Pn 118 9 15 )
+    ( Pn 109 9 11 )
     ( TD "2.0" )
 , PT
-    ( Pn 121 9 18 )
+    ( Pn 112 9 14 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -272,11 +254,11 @@
         )
     )
 , PT
-    ( Pn 123 10 1 )
+    ( Pn 114 10 1 )
     ( TK
         ( TokSymbol
             { tsText = "end"
-            , tsID = 40
+            , tsID = 39
             }
         )
     )

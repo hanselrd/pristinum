@@ -68,7 +68,7 @@ data Expr
   | EBShl Expr Expr
   | EBShr Expr Expr
   | EAdd Expr Expr
-  | ESubstract Expr Expr
+  | ESubtract Expr Expr
   | EPower Expr Expr
   | EMultiply Expr Expr
   | EDivide Expr Expr
@@ -86,7 +86,7 @@ data Expr
   | EAlignof Type
   | EPIncr Expr
   | EPDecr Expr
-  | ECall Expr [Expr]
+  | ECall IDENT [Expr]
   | EIndex Expr Expr
   | EAccess Expr Expr
   | EPAccess Expr Expr
@@ -107,18 +107,9 @@ data Type
   = TVoid
   | TBool
   | TChar
-  | TInt8
-  | TInt16
-  | TInt32
   | TInt64
-  | TUint8
-  | TUint16
-  | TUint32
-  | TUint64
-  | TFloat32
   | TFloat64
   | TPointer Type
-  | TArray Type
   | TIdent IDENT
   deriving (C.Eq, C.Ord, C.Show, C.Read)
 

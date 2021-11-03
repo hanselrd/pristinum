@@ -3,7 +3,7 @@
     ( TK
         ( TokSymbol
             { tsText = "func"
-            , tsID = 44
+            , tsID = 42
             }
         )
     )
@@ -33,13 +33,7 @@
     )
 , PT
     ( Pn 12 1 13 )
-    ( TK
-        ( TokSymbol
-            { tsText = "u64"
-            , tsID = 57
-            }
-        )
-    )
+    ( T_IDENT "u64" )
 , PT
     ( Pn 15 1 16 )
     ( TK
@@ -60,13 +54,7 @@
     )
 , PT
     ( Pn 18 1 19 )
-    ( TK
-        ( TokSymbol
-            { tsText = "u64"
-            , tsID = 57
-            }
-        )
-    )
+    ( T_IDENT "u64" )
 , PT
     ( Pn 21 1 22 )
     ( TK
@@ -81,7 +69,7 @@
     ( TK
         ( TokSymbol
             { tsText = "if"
-            , tsID = 49
+            , tsID = 44
             }
         )
     )
@@ -90,9 +78,6 @@
     ( T_IDENT "n" )
 , PT
     ( Pn 32 2 10 )
-    ( TI "2" )
-, PT
-    ( Pn 34 2 12 )
     ( TK
         ( TokSymbol
             { tsText = "<"
@@ -101,16 +86,10 @@
         )
     )
 , PT
-    ( Pn 35 2 13 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
+    ( Pn 34 2 12 )
+    ( TI "2" )
 , PT
-    ( Pn 37 2 15 )
+    ( Pn 35 2 13 )
     ( TK
         ( TokSymbol
             { tsText = ":"
@@ -119,19 +98,19 @@
         )
     )
 , PT
-    ( Pn 47 3 9 )
+    ( Pn 45 3 9 )
     ( TK
         ( TokSymbol
             { tsText = "return"
-            , tsID = 51
+            , tsID = 46
             }
         )
     )
 , PT
-    ( Pn 54 3 16 )
+    ( Pn 52 3 16 )
     ( T_IDENT "n" )
 , PT
-    ( Pn 55 3 17 )
+    ( Pn 53 3 17 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -140,28 +119,28 @@
         )
     )
 , PT
-    ( Pn 61 4 5 )
+    ( Pn 59 4 5 )
     ( TK
         ( TokSymbol
             { tsText = "end"
-            , tsID = 40
+            , tsID = 39
             }
         )
     )
 , PT
-    ( Pn 69 5 5 )
+    ( Pn 67 5 5 )
     ( TK
         ( TokSymbol
             { tsText = "return"
-            , tsID = 51
+            , tsID = 46
             }
         )
     )
 , PT
-    ( Pn 76 5 12 )
+    ( Pn 74 5 12 )
     ( T_IDENT "fib" )
 , PT
-    ( Pn 79 5 15 )
+    ( Pn 77 5 15 )
     ( TK
         ( TokSymbol
             { tsText = "("
@@ -170,31 +149,22 @@
         )
     )
 , PT
-    ( Pn 80 5 16 )
+    ( Pn 78 5 16 )
     ( T_IDENT "n" )
 , PT
-    ( Pn 82 5 18 )
+    ( Pn 80 5 18 )
+    ( TK
+        ( TokSymbol
+            { tsText = "-"
+            , tsID = 13
+            }
+        )
+    )
+, PT
+    ( Pn 82 5 20 )
     ( TI "1" )
 , PT
-    ( Pn 84 5 20 )
-    ( TK
-        ( TokSymbol
-            { tsText = "-"
-            , tsID = 13
-            }
-        )
-    )
-, PT
-    ( Pn 85 5 21 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
-, PT
-    ( Pn 87 5 23 )
+    ( Pn 83 5 21 )
     ( TK
         ( TokSymbol
             { tsText = ")"
@@ -203,52 +173,7 @@
         )
     )
 , PT
-    ( Pn 89 5 25 )
-    ( T_IDENT "fib" )
-, PT
-    ( Pn 92 5 28 )
-    ( TK
-        ( TokSymbol
-            { tsText = "("
-            , tsID = 6
-            }
-        )
-    )
-, PT
-    ( Pn 93 5 29 )
-    ( T_IDENT "n" )
-, PT
-    ( Pn 95 5 31 )
-    ( TI "2" )
-, PT
-    ( Pn 97 5 33 )
-    ( TK
-        ( TokSymbol
-            { tsText = "-"
-            , tsID = 13
-            }
-        )
-    )
-, PT
-    ( Pn 98 5 34 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
-, PT
-    ( Pn 100 5 36 )
-    ( TK
-        ( TokSymbol
-            { tsText = ")"
-            , tsID = 7
-            }
-        )
-    )
-, PT
-    ( Pn 102 5 38 )
+    ( Pn 85 5 23 )
     ( TK
         ( TokSymbol
             { tsText = "+"
@@ -257,46 +182,10 @@
         )
     )
 , PT
-    ( Pn 103 5 39 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
+    ( Pn 87 5 25 )
+    ( T_IDENT "fib" )
 , PT
-    ( Pn 105 5 41 )
-    ( TK
-        ( TokSymbol
-            { tsText = ";"
-            , tsID = 20
-            }
-        )
-    )
-, PT
-    ( Pn 107 6 1 )
-    ( TK
-        ( TokSymbol
-            { tsText = "end"
-            , tsID = 40
-            }
-        )
-    )
-, PT
-    ( Pn 112 8 1 )
-    ( TK
-        ( TokSymbol
-            { tsText = "func"
-            , tsID = 44
-            }
-        )
-    )
-, PT
-    ( Pn 117 8 6 )
-    ( T_IDENT "main" )
-, PT
-    ( Pn 121 8 10 )
+    ( Pn 90 5 28 )
     ( TK
         ( TokSymbol
             { tsText = "("
@@ -305,7 +194,22 @@
         )
     )
 , PT
-    ( Pn 122 8 11 )
+    ( Pn 91 5 29 )
+    ( T_IDENT "n" )
+, PT
+    ( Pn 93 5 31 )
+    ( TK
+        ( TokSymbol
+            { tsText = "-"
+            , tsID = 13
+            }
+        )
+    )
+, PT
+    ( Pn 95 5 33 )
+    ( TI "2" )
+, PT
+    ( Pn 96 5 34 )
     ( TK
         ( TokSymbol
             { tsText = ")"
@@ -314,7 +218,55 @@
         )
     )
 , PT
-    ( Pn 124 8 13 )
+    ( Pn 97 5 35 )
+    ( TK
+        ( TokSymbol
+            { tsText = ";"
+            , tsID = 20
+            }
+        )
+    )
+, PT
+    ( Pn 99 6 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "end"
+            , tsID = 39
+            }
+        )
+    )
+, PT
+    ( Pn 104 8 1 )
+    ( TK
+        ( TokSymbol
+            { tsText = "func"
+            , tsID = 42
+            }
+        )
+    )
+, PT
+    ( Pn 109 8 6 )
+    ( T_IDENT "main" )
+, PT
+    ( Pn 113 8 10 )
+    ( TK
+        ( TokSymbol
+            { tsText = "("
+            , tsID = 6
+            }
+        )
+    )
+, PT
+    ( Pn 114 8 11 )
+    ( TK
+        ( TokSymbol
+            { tsText = ")"
+            , tsID = 7
+            }
+        )
+    )
+, PT
+    ( Pn 116 8 13 )
     ( TK
         ( TokSymbol
             { tsText = "@"
@@ -323,16 +275,16 @@
         )
     )
 , PT
-    ( Pn 125 8 14 )
+    ( Pn 117 8 14 )
     ( TK
         ( TokSymbol
             { tsText = "void"
-            , tsID = 60
+            , tsID = 51
             }
         )
     )
 , PT
-    ( Pn 129 8 18 )
+    ( Pn 121 8 18 )
     ( TK
         ( TokSymbol
             { tsText = ":"
@@ -341,10 +293,10 @@
         )
     )
 , PT
-    ( Pn 135 9 5 )
+    ( Pn 127 9 5 )
     ( T_IDENT "n" )
 , PT
-    ( Pn 137 9 7 )
+    ( Pn 129 9 7 )
     ( TK
         ( TokSymbol
             { tsText = "@"
@@ -353,16 +305,10 @@
         )
     )
 , PT
-    ( Pn 138 9 8 )
-    ( TK
-        ( TokSymbol
-            { tsText = "u64"
-            , tsID = 57
-            }
-        )
-    )
+    ( Pn 130 9 8 )
+    ( T_IDENT "u64" )
 , PT
-    ( Pn 142 9 12 )
+    ( Pn 134 9 12 )
     ( TK
         ( TokSymbol
             { tsText = ":="
@@ -371,10 +317,10 @@
         )
     )
 , PT
-    ( Pn 145 9 15 )
+    ( Pn 137 9 15 )
     ( TI "1" )
 , PT
-    ( Pn 146 9 16 )
+    ( Pn 138 9 16 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -383,22 +329,19 @@
         )
     )
 , PT
-    ( Pn 152 10 5 )
+    ( Pn 144 10 5 )
     ( TK
         ( TokSymbol
             { tsText = "while"
-            , tsID = 61
+            , tsID = 52
             }
         )
     )
 , PT
-    ( Pn 158 10 11 )
+    ( Pn 150 10 11 )
     ( T_IDENT "n" )
 , PT
-    ( Pn 160 10 13 )
-    ( TI "15" )
-, PT
-    ( Pn 163 10 16 )
+    ( Pn 152 10 13 )
     ( TK
         ( TokSymbol
             { tsText = "<"
@@ -407,16 +350,10 @@
         )
     )
 , PT
-    ( Pn 164 10 17 )
-    ( TK
-        ( TokSymbol
-            { tsText = "``"
-            , tsID = 34
-            }
-        )
-    )
+    ( Pn 154 10 15 )
+    ( TI "15" )
 , PT
-    ( Pn 166 10 19 )
+    ( Pn 156 10 17 )
     ( TK
         ( TokSymbol
             { tsText = ":"
@@ -425,10 +362,10 @@
         )
     )
 , PT
-    ( Pn 176 11 9 )
+    ( Pn 166 11 9 )
     ( T_IDENT "print" )
 , PT
-    ( Pn 181 11 14 )
+    ( Pn 171 11 14 )
     ( TK
         ( TokSymbol
             { tsText = "("
@@ -437,10 +374,10 @@
         )
     )
 , PT
-    ( Pn 182 11 15 )
+    ( Pn 172 11 15 )
     ( T_IDENT "fib" )
 , PT
-    ( Pn 185 11 18 )
+    ( Pn 175 11 18 )
     ( TK
         ( TokSymbol
             { tsText = "("
@@ -449,10 +386,10 @@
         )
     )
 , PT
-    ( Pn 186 11 19 )
+    ( Pn 176 11 19 )
     ( T_IDENT "n" )
 , PT
-    ( Pn 187 11 20 )
+    ( Pn 177 11 20 )
     ( TK
         ( TokSymbol
             { tsText = ")"
@@ -461,7 +398,7 @@
         )
     )
 , PT
-    ( Pn 188 11 21 )
+    ( Pn 178 11 21 )
     ( TK
         ( TokSymbol
             { tsText = ")"
@@ -470,7 +407,7 @@
         )
     )
 , PT
-    ( Pn 189 11 22 )
+    ( Pn 179 11 22 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -479,22 +416,7 @@
         )
     )
 , PT
-    ( Pn 199 12 9 )
-    ( T_IDENT "n" )
-, PT
-    ( Pn 201 12 11 )
-    ( TK
-        ( TokSymbol
-            { tsText = "="
-            , tsID = 24
-            }
-        )
-    )
-, PT
-    ( Pn 203 12 13 )
-    ( T_IDENT "n" )
-, PT
-    ( Pn 205 12 15 )
+    ( Pn 189 12 9 )
     ( TK
         ( TokSymbol
             { tsText = "++"
@@ -503,16 +425,10 @@
         )
     )
 , PT
-    ( Pn 207 12 17 )
-    ( TK
-        ( TokSymbol
-            { tsText = "`"
-            , tsID = 33
-            }
-        )
-    )
+    ( Pn 191 12 11 )
+    ( T_IDENT "n" )
 , PT
-    ( Pn 208 12 18 )
+    ( Pn 192 12 12 )
     ( TK
         ( TokSymbol
             { tsText = ";"
@@ -521,20 +437,20 @@
         )
     )
 , PT
-    ( Pn 214 13 5 )
+    ( Pn 198 13 5 )
     ( TK
         ( TokSymbol
             { tsText = "end"
-            , tsID = 40
+            , tsID = 39
             }
         )
     )
 , PT
-    ( Pn 218 14 1 )
+    ( Pn 202 14 1 )
     ( TK
         ( TokSymbol
             { tsText = "end"
-            , tsID = 40
+            , tsID = 39
             }
         )
     )

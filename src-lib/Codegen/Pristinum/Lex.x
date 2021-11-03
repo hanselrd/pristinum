@@ -173,37 +173,36 @@ eitherResIdent tv s = treeFind resWords
 -- | The keywords and symbols of the language organized as binary search tree.
 resWords :: BTree
 resWords =
-  b "^" 32
-    (b "." 16
-       (b "*" 8
+  b ">>" 28
+    (b "--" 14
+       (b ")" 7
           (b "&" 4
-             (b "!=" 2 (b "!" 1 N N) (b "%" 3 N N))
-             (b "(" 6 (b "&&" 5 N N) (b ")" 7 N N)))
-          (b "," 12
-             (b "+" 10 (b "**" 9 N N) (b "++" 11 N N))
-             (b "--" 14 (b "-" 13 N N) (b "->" 15 N N))))
-       (b "=" 24
-          (b ";" 20
-             (b ":" 18 (b "/" 17 N N) (b ":=" 19 N N))
-             (b "<<" 22 (b "<" 21 N N) (b "<=" 23 N N)))
-          (b ">>" 28
-             (b ">" 26 (b "==" 25 N N) (b ">=" 27 N N))
-             (b "[" 30 (b "@" 29 N N) (b "]" 31 N N)))))
-    (b "if" 48
-       (b "f32" 40
-          (b "char" 36
-             (b "bool" 34 (b "alignof" 33 N N) (b "cast" 35 N N))
-             (b "else" 38 (b "elif" 37 N N) (b "end" 39 N N)))
-          (b "i16" 44
-             (b "false" 42 (b "f64" 41 N N) (b "func" 43 N N))
-             (b "i64" 46 (b "i32" 45 N N) (b "i8" 47 N N))))
-       (b "u64" 56
-          (b "struct" 52
-             (b "return" 50 (b "nil" 49 N N) (b "sizeof" 51 N N))
-             (b "u16" 54 (b "true" 53 N N) (b "u32" 55 N N)))
-          (b "while" 60
-             (b "union" 58 (b "u8" 57 N N) (b "void" 59 N N))
-             (b "||" 62 (b "|" 61 N N) (b "~" 63 N N)))))
+             (b "!=" 2 (b "!" 1 N N) (b "%" 3 N N)) (b "(" 6 (b "&&" 5 N N) N))
+          (b "++" 11
+             (b "**" 9 (b "*" 8 N N) (b "+" 10 N N))
+             (b "-" 13 (b "," 12 N N) N)))
+       (b "<" 21
+          (b ":" 18
+             (b "." 16 (b "->" 15 N N) (b "/" 17 N N))
+             (b ";" 20 (b ":=" 19 N N) N))
+          (b "==" 25
+             (b "<=" 23 (b "<<" 22 N N) (b "=" 24 N N))
+             (b ">=" 27 (b ">" 26 N N) N))))
+    (b "func" 42
+       (b "cast" 35
+          (b "^" 32
+             (b "[" 30 (b "@" 29 N N) (b "]" 31 N N))
+             (b "bool" 34 (b "alignof" 33 N N) N))
+          (b "end" 39
+             (b "elif" 37 (b "char" 36 N N) (b "else" 38 N N))
+             (b "false" 41 (b "f64" 40 N N) N)))
+       (b "true" 49
+          (b "return" 46
+             (b "if" 44 (b "i64" 43 N N) (b "nil" 45 N N))
+             (b "struct" 48 (b "sizeof" 47 N N) N))
+          (b "|" 53
+             (b "void" 51 (b "union" 50 N N) (b "while" 52 N N))
+             (b "~" 55 (b "||" 54 N N) N))))
   where
   b s n = B bs (TS bs n)
     where

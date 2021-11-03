@@ -9,36 +9,6 @@ module Codegen.Pristinum.Par
   ( happyError
   , myLexer
   , pProgram
-  , pProgramUnit
-  , pListProgramUnit
-  , pRecord
-  , pRecordType
-  , pFunction
-  , pStmt
-  , pListStmt
-  , pElifStmt
-  , pListElifStmt
-  , pExpr
-  , pExpr1
-  , pExpr2
-  , pExpr3
-  , pExpr4
-  , pExpr5
-  , pExpr6
-  , pExpr7
-  , pExpr8
-  , pExpr9
-  , pExpr10
-  , pExpr11
-  , pExpr12
-  , pExpr13
-  , pListExpr
-  , pBind
-  , pBind1
-  , pBind2
-  , pListBind1
-  , pListBind2
-  , pType
   ) where
 
 import Prelude
@@ -50,36 +20,6 @@ import qualified Data.Text
 }
 
 %name pProgram Program
-%name pProgramUnit ProgramUnit
-%name pListProgramUnit ListProgramUnit
-%name pRecord Record
-%name pRecordType RecordType
-%name pFunction Function
-%name pStmt Stmt
-%name pListStmt ListStmt
-%name pElifStmt ElifStmt
-%name pListElifStmt ListElifStmt
-%name pExpr Expr
-%name pExpr1 Expr1
-%name pExpr2 Expr2
-%name pExpr3 Expr3
-%name pExpr4 Expr4
-%name pExpr5 Expr5
-%name pExpr6 Expr6
-%name pExpr7 Expr7
-%name pExpr8 Expr8
-%name pExpr9 Expr9
-%name pExpr10 Expr10
-%name pExpr11 Expr11
-%name pExpr12 Expr12
-%name pExpr13 Expr13
-%name pListExpr ListExpr
-%name pBind Bind
-%name pBind1 Bind1
-%name pBind2 Bind2
-%name pListBind1 ListBind1
-%name pListBind2 ListBind2
-%name pType Type
 -- no lexer declaration
 %monad { Err } { (>>=) } { return }
 %tokentype {Token}
@@ -123,30 +63,22 @@ import qualified Data.Text
   'elif'    { PT _ (TS _ 37)    }
   'else'    { PT _ (TS _ 38)    }
   'end'     { PT _ (TS _ 39)    }
-  'f32'     { PT _ (TS _ 40)    }
-  'f64'     { PT _ (TS _ 41)    }
-  'false'   { PT _ (TS _ 42)    }
-  'func'    { PT _ (TS _ 43)    }
-  'i16'     { PT _ (TS _ 44)    }
-  'i32'     { PT _ (TS _ 45)    }
-  'i64'     { PT _ (TS _ 46)    }
-  'i8'      { PT _ (TS _ 47)    }
-  'if'      { PT _ (TS _ 48)    }
-  'nil'     { PT _ (TS _ 49)    }
-  'return'  { PT _ (TS _ 50)    }
-  'sizeof'  { PT _ (TS _ 51)    }
-  'struct'  { PT _ (TS _ 52)    }
-  'true'    { PT _ (TS _ 53)    }
-  'u16'     { PT _ (TS _ 54)    }
-  'u32'     { PT _ (TS _ 55)    }
-  'u64'     { PT _ (TS _ 56)    }
-  'u8'      { PT _ (TS _ 57)    }
-  'union'   { PT _ (TS _ 58)    }
-  'void'    { PT _ (TS _ 59)    }
-  'while'   { PT _ (TS _ 60)    }
-  '|'       { PT _ (TS _ 61)    }
-  '||'      { PT _ (TS _ 62)    }
-  '~'       { PT _ (TS _ 63)    }
+  'f64'     { PT _ (TS _ 40)    }
+  'false'   { PT _ (TS _ 41)    }
+  'func'    { PT _ (TS _ 42)    }
+  'i64'     { PT _ (TS _ 43)    }
+  'if'      { PT _ (TS _ 44)    }
+  'nil'     { PT _ (TS _ 45)    }
+  'return'  { PT _ (TS _ 46)    }
+  'sizeof'  { PT _ (TS _ 47)    }
+  'struct'  { PT _ (TS _ 48)    }
+  'true'    { PT _ (TS _ 49)    }
+  'union'   { PT _ (TS _ 50)    }
+  'void'    { PT _ (TS _ 51)    }
+  'while'   { PT _ (TS _ 52)    }
+  '|'       { PT _ (TS _ 53)    }
+  '||'      { PT _ (TS _ 54)    }
+  '~'       { PT _ (TS _ 55)    }
   L_charac  { PT _ (TC $$)      }
   L_doubl   { PT _ (TD $$)      }
   L_integ   { PT _ (TI $$)      }
@@ -272,7 +204,7 @@ Expr8
 Expr9 :: { Codegen.Pristinum.Abs.Expr }
 Expr9
   : Expr9 '+' Expr10 { Codegen.Pristinum.Abs.EAdd $1 $3 }
-  | Expr9 '-' Expr10 { Codegen.Pristinum.Abs.ESubstract $1 $3 }
+  | Expr9 '-' Expr10 { Codegen.Pristinum.Abs.ESubtract $1 $3 }
   | Expr10 { $1 }
 
 Expr10 :: { Codegen.Pristinum.Abs.Expr }
@@ -302,7 +234,7 @@ Expr12 :: { Codegen.Pristinum.Abs.Expr }
 Expr12
   : Expr12 '++' { Codegen.Pristinum.Abs.EPIncr $1 }
   | Expr12 '--' { Codegen.Pristinum.Abs.EPDecr $1 }
-  | Expr13 '(' ListExpr ')' { Codegen.Pristinum.Abs.ECall $1 $3 }
+  | IDENT '(' ListExpr ')' { Codegen.Pristinum.Abs.ECall $1 $3 }
   | Expr13 '[' Expr ']' { Codegen.Pristinum.Abs.EIndex $1 $3 }
   | Expr12 '.' Expr13 { Codegen.Pristinum.Abs.EAccess $1 $3 }
   | Expr12 '->' Expr13 { Codegen.Pristinum.Abs.EPAccess $1 $3 }
@@ -350,18 +282,9 @@ Type
   : 'void' { Codegen.Pristinum.Abs.TVoid }
   | 'bool' { Codegen.Pristinum.Abs.TBool }
   | 'char' { Codegen.Pristinum.Abs.TChar }
-  | 'i8' { Codegen.Pristinum.Abs.TInt8 }
-  | 'i16' { Codegen.Pristinum.Abs.TInt16 }
-  | 'i32' { Codegen.Pristinum.Abs.TInt32 }
   | 'i64' { Codegen.Pristinum.Abs.TInt64 }
-  | 'u8' { Codegen.Pristinum.Abs.TUint8 }
-  | 'u16' { Codegen.Pristinum.Abs.TUint16 }
-  | 'u32' { Codegen.Pristinum.Abs.TUint32 }
-  | 'u64' { Codegen.Pristinum.Abs.TUint64 }
-  | 'f32' { Codegen.Pristinum.Abs.TFloat32 }
   | 'f64' { Codegen.Pristinum.Abs.TFloat64 }
   | Type '*' { Codegen.Pristinum.Abs.TPointer $1 }
-  | '[' Type ']' { Codegen.Pristinum.Abs.TArray $2 }
   | IDENT { Codegen.Pristinum.Abs.TIdent $1 }
 
 {

@@ -34,241 +34,254 @@ PProgram
                     ]
                 )
             , SExpr
-                ( ECast TUint64
+                ( ECast
+                    ( TIdent
+                        ( IDENT "u64" )
+                    )
                     ( EInt 1 )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EAccess
                     ( EIdent
                         ( IDENT "p" )
                     )
                     ( EIdent
                         ( IDENT "x" )
-                    ) BOAccess
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EAccess
                     ( EIdent
                         ( IDENT "p" )
                     )
                     ( EIdent
                         ( IDENT "x" )
-                    ) BOPAccess
+                    )
                 )
             , SExpr
-                ( EUnOpPre UODeref
+                ( EDeref
                     ( EIdent
                         ( IDENT "p" )
                     )
                 )
             , SExpr
-                ( EUnOpPre UORef
+                ( ERef
                     ( EIdent
                         ( IDENT "p" )
                     )
                 )
-            , SExpr ( ESizeof TUint64 )
-            , SExpr ( EAlignof TUint64 )
             , SExpr
-                ( EUnOpPost
-                    ( EIdent
-                        ( IDENT "x" )
-                    ) UOIncr
+                ( ESizeof
+                    ( TIdent
+                        ( IDENT "u64" )
+                    )
                 )
             , SExpr
-                ( EUnOpPost
-                    ( EIdent
-                        ( IDENT "x" )
-                    ) UODecr
+                ( EAlignof
+                    ( TIdent
+                        ( IDENT "u64" )
+                    )
                 )
             , SExpr
-                ( EUnOpPost
+                ( EIncr
                     ( EIdent
                         ( IDENT "x" )
-                    ) UONegative
+                    )
                 )
             , SExpr
-                ( EUnOpPost
+                ( EDecr
                     ( EIdent
                         ( IDENT "x" )
-                    ) UOBitNot
+                    )
                 )
             , SExpr
-                ( EUnOpPost
+                ( ENeg
                     ( EIdent
                         ( IDENT "x" )
-                    ) UONot
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBNot
+                    ( EIdent
+                        ( IDENT "x" )
+                    )
+                )
+            , SExpr
+                ( ELNot
+                    ( EIdent
+                        ( IDENT "x" )
+                    )
+                )
+            , SExpr
+                ( EAdd
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOAdd
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ESubtract
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOSubtract
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EMultiply
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOMultiply
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EDivide
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BODivide
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EMod
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOMod
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EPower
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOPower
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBShl
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOBitShl
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBShr
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOBitShr
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBAnd
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOBitAnd
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBOr
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOBitOr
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EBXor
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOBitXor
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EEqual
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOEqual
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ENotEqual
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BONotEqual
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ELess
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOLess
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EGreater
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOGreater
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ELessEqual
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOLessEqual
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( EGreaterEqual
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOGreaterEqual
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ELAnd
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOAnd
+                    )
                 )
             , SExpr
-                ( EBinOpPost
+                ( ELOr
                     ( EIdent
                         ( IDENT "x" )
                     )
                     ( EIdent
                         ( IDENT "y" )
-                    ) BOOr
+                    )
                 )
             ]
         )

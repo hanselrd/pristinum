@@ -96,7 +96,7 @@ library
         Codegen.Pristinum.Abs,
         Codegen.Pristinum.Lex,
         Codegen.Pristinum.Par,
-        Pristinum.SAbs,
+        -- Pristinum.SAbs,
         Pristinum
 
     -- Modules included in this library but not exported.
