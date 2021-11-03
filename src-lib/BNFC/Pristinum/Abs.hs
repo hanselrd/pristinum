@@ -2,7 +2,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 -- | The abstract syntax of language Pristinum.
-module Codegen.Pristinum.Abs where
+module BNFC.Pristinum.Abs where
 
 import qualified Data.String
 import qualified Data.Text

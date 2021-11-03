@@ -7,7 +7,7 @@
 
 {-# LANGUAGE PatternSynonyms #-}
 
-module Codegen.Pristinum.Lex where
+module BNFC.Pristinum.Lex where
 
 import Prelude
 

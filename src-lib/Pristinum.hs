@@ -3,6 +3,6 @@ module Pristinum
   )
 where
 
-import Codegen.Pristinum.Abs as P
-import Codegen.Pristinum.Lex as P
-import Codegen.Pristinum.Par as P
+import BNFC.Pristinum.Abs as P
+import BNFC.Pristinum.Lex as P
+import BNFC.Pristinum.Par as P

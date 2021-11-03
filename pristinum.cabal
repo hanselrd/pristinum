@@ -93,9 +93,9 @@ library
 
     -- Modules exported by the library.
     exposed-modules:
-        Codegen.Pristinum.Abs,
-        Codegen.Pristinum.Lex,
-        Codegen.Pristinum.Par,
+        BNFC.Pristinum.Abs,
+        BNFC.Pristinum.Lex,
+        BNFC.Pristinum.Par,
         -- Pristinum.SAbs,
         Pristinum
 
